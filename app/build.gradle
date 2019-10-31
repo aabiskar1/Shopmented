@@ -30,5 +30,5 @@ dependencies {
     //animated button for login
     implementation 'br.com.simplepass:loading-button-android:1.14.0'
 
-    compile 'net.colindodd:gradientlayout:1.2'
+    implementation 'net.colindodd:gradientlayout:1.2'
 }
