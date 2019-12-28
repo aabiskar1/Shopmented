@@ -13,12 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //for changing status bar icon colors
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -26,6 +28,17 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         changeStatusBarColor();
         setStatusBarGradiant(LoginActivity.this);
+        Bundle extras = getIntent().getExtras();
+        String item_name;
+
+        if (extras != null) {
+            item_name = extras.getString("arguments");
+            Intent intent = new Intent(getBaseContext(), ItemPage.class);
+            intent.putExtra("arguments", item_name);
+            finish();
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(), String.valueOf(item_name), Toast.LENGTH_SHORT).show();
+        }
     }
     public void onLoginClick(View View){
         startActivity(new Intent(this,RegisterActivity.class));
@@ -37,12 +50,17 @@ public class LoginActivity extends AppCompatActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
-            window.setStatusBarColor(getResources().getColor(R.color.register_bk_color));
+            window.setStatusBarColor(getResources().getColor(R.color.register_bk_color,getTheme()));
         }
     }
 
     public void openProfile(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+
+    }
+    public void openProductList(View view){
+        Intent intent = new Intent(this, ProductList.class);
         startActivity(intent);
 
     }

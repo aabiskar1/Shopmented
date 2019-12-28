@@ -11,10 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aabiskar.shopmented.models.Users;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,7 +37,7 @@ import retrofit2.Callback;
 
 public class RegisterActivity extends AppCompatActivity {
 private EditText name,email,mobile_number,password;
-private static String URL_REGIST = "http://192.168.31.117:8081/shopmented/register.php";
+private static String URL_REGIST = "http://192.168.31.117:8082/shopmented/register.php";
 public ApiInterface apiInterface;
 private CircularProgressButton registerBtn;
     @Override
@@ -62,7 +62,7 @@ private CircularProgressButton registerBtn;
                 String passwordS= password.getText().toString();
                 String phoneS= mobile_number.getText().toString();
 
-                Register(nameS,passwordS,emailS,phoneS);
+                Register(nameS,emailS,passwordS,phoneS);
             }
         });
 
