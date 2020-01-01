@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/botNav_home"
+        android:icon="@drawable/ic_home_white_24dp"
+        android:title="Home"/>
+    <item android:id="@+id/botNav_shop"
+        android:icon="@drawable/ic_shopping_basket_white_24dp"
+        android:title="Shop"/>
+    <item android:id="@+id/botNav_cart"
+        android:icon="@drawable/ic_shopping_cart_white_24dp"
+        android:title="My Cart"/>
+    <item android:id="@+id/botNav_services"
+        android:icon="@drawable/ic_services_24dp"
+        android:title="Services"/>
+    <item android:id="@+id/botNav_profile"
+        android:icon="@drawable/ic_account_circle_white_24dp"
+        android:title="Profile"/>
+</menu>

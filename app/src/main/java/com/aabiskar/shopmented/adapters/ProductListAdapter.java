@@ -9,24 +9,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aabiskar.shopmented.R;
 import com.aabiskar.shopmented.models.Products;
-import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
-public class ProdictListAdapter extends RecyclerView.Adapter<ProdictListAdapter.ProductListViewHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 
     private Context context;
-    private List<Products> products;
+    private ArrayList<Products> products;
+    private  OnProductClickListener mListener;
 
-    public ProdictListAdapter(Context context, List<Products> products) {
+    public ProductListAdapter(Context context, ArrayList<Products> products) {
         this.context = context;
         this.products = products;
     }
@@ -36,7 +34,7 @@ public class ProdictListAdapter extends RecyclerView.Adapter<ProdictListAdapter.
     public ProductListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_products_card,parent,false);
-        return new ProductListViewHolder(view);
+        return new ProductListViewHolder(view,mListener);
     }
 
     @Override
@@ -64,13 +62,27 @@ public class ProdictListAdapter extends RecyclerView.Adapter<ProdictListAdapter.
         TextView prodcutName;
         ImageView img_view;
 
-        public ProductListViewHolder(View itemView){
+        public ProductListViewHolder(View itemView, OnProductClickListener listener){
             super(itemView);
             prodcutName = itemView.findViewById(R.id.product_card_product_name_tv);
             img_view = itemView.findViewById(R.id.product_card_img_view);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   if(listener != null){
+                       int position = getAdapterPosition();
+                       if(position != RecyclerView.NO_POSITION){
+                           listener.onProductClick(position);
+                       }
+                   }
+                }
+            });
         }
-
-
-
+    }
+    public interface  OnProductClickListener{
+        void onProductClick(int position);
+    }
+    public void setOnProductClicklistener(OnProductClickListener listener){
+        mListener = listener;
     }
 }

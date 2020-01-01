@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     tools:context=".products_card">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/product_list_card_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -50,6 +50,6 @@
                 android:layout_toRightOf="@id/product_card_img_view"
                 android:text="Product Name" />
         </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

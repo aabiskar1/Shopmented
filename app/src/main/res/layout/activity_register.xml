@@ -36,7 +36,7 @@
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_svg_logo_transparent" />
             </RelativeLayout>
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -118,7 +118,7 @@
                         android:onClick="onLoginClick"/>
 
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
 
             <LinearLayout

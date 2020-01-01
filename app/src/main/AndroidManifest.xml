@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aabiskar.shopmented">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +17,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".products_card"></activity>
-        <activity android:name=".ProductList" />
+        <activity android:name=".product_page"></activity>
+        <activity android:name=".SimpleScannerActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".products_card" />
         <activity android:name=".ItemPage" />
         <activity android:name=".content_profile" />
         <activity
@@ -23,6 +28,9 @@
             android:theme="@style/AppTheme.ProfileTheme" />
         <activity
             android:name=".RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QRScannerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"

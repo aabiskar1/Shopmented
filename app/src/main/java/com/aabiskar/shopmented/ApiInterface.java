@@ -3,6 +3,7 @@ package com.aabiskar.shopmented;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,7 +24,13 @@ public interface ApiInterface {
     );
 
     @GET("products.php")
-    Call<List<Products>> getAllProducts();
+    Call<ArrayList<Products>> getAllProducts();
+
+    @FormUrlEncoded
+    @POST("getProduct.php")
+    Call<ArrayList<Products>> getProduct(
+            @Field("model") String model
+    );
 
 
 }
