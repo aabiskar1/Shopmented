@@ -84,9 +84,11 @@ public class ProductListFragment extends Fragment {
             public void onProductClick(int position) {
                 String product_name = productsList.get(position).getName().toString();
                 String product_img_url = productsList.get(position).getImg_url().toString();
+                String product_price = String.valueOf(productsList.get(position).getPrice());
 
                 Intent i = new Intent(getActivity(), product_page.class);
                 i.putExtra("img_url",product_img_url);
+                i.putExtra("price",product_price);
                 startActivity(i);
                 Toast.makeText(getActivity(),product_name , Toast.LENGTH_SHORT).show();
             }

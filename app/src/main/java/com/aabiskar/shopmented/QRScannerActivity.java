@@ -128,8 +128,10 @@ final Activity activity = this;
             public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
                 if(!response.body().isEmpty()) {
                     String product_img_url =  response.body().get(0).getImg_url();
+                    String product_price = String.valueOf(response.body().get(0).getPrice());
                     Intent i = new Intent(getApplicationContext(), product_page.class);
                     i.putExtra("img_url",product_img_url);
+                    i.putExtra("price",product_price);
                     startActivity(i);
                 }
                 else{
