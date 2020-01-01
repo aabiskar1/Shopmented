@@ -1,6 +1,7 @@
 package com.aabiskar.shopmented;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -126,7 +127,10 @@ final Activity activity = this;
             @Override
             public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
                 if(!response.body().isEmpty()) {
-                    Toast.makeText(getApplicationContext().getApplicationContext(), response.body().get(0).getName(), Toast.LENGTH_SHORT).show();
+                    String product_img_url =  response.body().get(0).getImg_url();
+                    Intent i = new Intent(getApplicationContext(), product_page.class);
+                    i.putExtra("img_url",product_img_url);
+                    startActivity(i);
                 }
                 else{
                     Toast.makeText(QRScannerActivity.this, "value of response is null", Toast.LENGTH_SHORT).show();
