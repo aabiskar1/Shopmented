@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.crashlytics.android.Crashlytics;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
@@ -33,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        getSupportActionBar().hide();
 
         bottomNavigation = findViewById(R.id.bottom_nav_bar);
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home_white_24dp));

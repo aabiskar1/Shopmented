@@ -1,9 +1,9 @@
 package com.aabiskar.shopmented;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.widget.Toast;
+        import android.os.Bundle;
+        import android.widget.Toast;
 
 public class ItemPage extends AppCompatActivity {
 

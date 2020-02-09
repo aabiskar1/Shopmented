@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997059837294",
+    "firebase_url": "https://shopmented.firebaseio.com",
+    "project_id": "shopmented",
+    "storage_bucket": "shopmented.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997059837294:android:14fd92c15d1dd56e79157f",
+        "android_client_info": {
+          "package_name": "com.aabiskar.shopmented"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997059837294-amtl1m4928sq7pagldfe92f10oko9tcm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aabiskar.shopmented",
+            "certificate_hash": "7050ca1087523da719de1a52a43c98bdc3a4853a"
+          }
+        },
+        {
+          "client_id": "997059837294-0c3rv7v8j4gej0mbcipblcu1carjd62a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuv5UrqVSH1i-PodIVAey5Rn9AQocWjEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997059837294-0c3rv7v8j4gej0mbcipblcu1carjd62a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

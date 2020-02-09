@@ -4,9 +4,6 @@ import com.google.gson.Gson;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-/**
- * Created by haerul on 15/03/18.
- */
 
 public class ApiClient {
 

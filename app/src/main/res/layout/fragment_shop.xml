@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShopFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_banner_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/toolbar">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/home_topics_layout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/home_banner_recyclerView">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/CrimsonTextSemiBold"
+                    android:text="TRENDING CATEGORIES"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/home_chairLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/lightColorPrimary">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_sofa" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@id/imageView"
+                            android:gravity="center_vertical"
+                            android:text="SOFA"
+                            android:textColor="@color/whiteCardColor"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/home_sofaLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:background="@color/lightColorPrimary">
+
+                        <ImageView
+                            android:id="@+id/chair_imgView"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/ic_sofa" />
+
+                        <TextView
+                            android:id="@+id/chairLbl"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@id/chair_imgView"
+                            android:gravity="center_vertical"
+                            android:text="SOFA"
+                            android:textColor="@color/whiteCardColor"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
