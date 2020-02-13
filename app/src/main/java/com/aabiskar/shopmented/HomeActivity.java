@@ -1,6 +1,8 @@
 package com.aabiskar.shopmented;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -79,10 +81,31 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(intentQR);
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(), "case 1", Toast.LENGTH_SHORT).show();
+                        // Create new fragment and transaction
+                        Fragment ShopFragment = new ShopFragment();
+                        FragmentTransaction shoptransaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+                        shoptransaction.replace(R.id.homeFragment, ShopFragment);
+                        shoptransaction.addToBackStack(null);
+
+// Commit the transaction
+                        shoptransaction.commit();
                         break;
+
                     case 2:
-                        Toast.makeText(getApplicationContext(), "case 2", Toast.LENGTH_SHORT).show();
+                        // Create new fragment and transaction
+                        Fragment newFragment = new ProductListFragment();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+                        transaction.replace(R.id.homeFragment, newFragment);
+                        transaction.addToBackStack(null);
+
+// Commit the transaction
+                        transaction.commit();
                         break;
                     case 3:
                         Toast.makeText(getApplicationContext(), "case 3", Toast.LENGTH_SHORT).show();

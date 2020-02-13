@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".product_page"></activity>
+        <activity android:name=".BannerLayoutCard"></activity>
+        <activity android:name=".product_page" />
         <activity android:name=".SimpleScannerActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".products_card" />

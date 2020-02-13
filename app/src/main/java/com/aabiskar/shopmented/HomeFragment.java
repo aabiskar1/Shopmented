@@ -1,20 +1,34 @@
 package com.aabiskar.shopmented;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.aabiskar.shopmented.adapters.BannerAdapter;
+import com.aabiskar.shopmented.adapters.ProductListAdapter;
+import com.aabiskar.shopmented.models.Banners;
+import com.aabiskar.shopmented.models.Products;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-
 
     public HomeFragment() {
         // Required empty public constructor

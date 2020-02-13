@@ -1,5 +1,6 @@
 package com.aabiskar.shopmented;
 
+import com.aabiskar.shopmented.models.Banners;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
 
@@ -26,11 +27,16 @@ public interface ApiInterface {
     @GET("products.php")
     Call<ArrayList<Products>> getAllProducts();
 
+    @GET("getHomeBanner.php")
+    Call<ArrayList<Banners>> getHomeBanners();
+
     @FormUrlEncoded
     @POST("getProduct.php")
     Call<ArrayList<Products>> getProduct(
             @Field("model") String model
     );
+
+
 
 
 }
