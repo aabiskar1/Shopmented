@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E2A76D</color>
-    <color name="lightColorPrimary">#EEBD9D</color>
-    <color name="colorPrimaryDark">#F1AD5F</color>
+
+    <color name="colorPrimary">#F9861B</color>
+    <color name="lightColorPrimary">#FFAE68</color>
+    <color name="colorPrimaryDark">#F9861B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="buttons">#FD7C0A</color>
+    <color name="grey">#D1CACA</color>
 
 
     <!--colors for modern ui-->

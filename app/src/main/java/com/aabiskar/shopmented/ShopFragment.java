@@ -38,7 +38,7 @@ public class ShopFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewBanners.setLayoutManager(linearLayoutManager);
         getData();
         Log.d("thisisadapter","on create of shop");

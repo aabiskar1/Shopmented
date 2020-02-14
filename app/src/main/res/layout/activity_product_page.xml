@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="6"
-    android:background="@color/colorPrimary"
     tools:context=".product_page">
 
     <RelativeLayout

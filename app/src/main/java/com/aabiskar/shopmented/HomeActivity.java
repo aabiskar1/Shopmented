@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigation.setBackgroundColor(getColor(colorPrimary));
+//        bottomNavigation.setBackgroundColor(getColor(colorPrimary));
         bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model p1) {
