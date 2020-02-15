@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.Users;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -62,7 +63,7 @@ private CircularProgressButton registerBtn;
                 String passwordS= password.getText().toString();
                 String phoneS= mobile_number.getText().toString();
 
-                Register(nameS,emailS,passwordS,phoneS);
+                Register(emailS,passwordS,nameS,phoneS);
             }
         });
 
@@ -141,29 +142,25 @@ private CircularProgressButton registerBtn;
 
     }
 
-    public void Register(final String name,String email,String phone,String password ){
+    public void Register(final String email,String password,String name,String phone ){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Users> call = apiInterface.saveNote(name,email,phone,password);
-        call.enqueue(new Callback<Users>() {
-            @Override
-            public void onResponse(@NonNull Call<Users> call,@NonNull retrofit2.Response<Users> response) {
-                if (response.isSuccessful() && response.body() !=null){
-                    Boolean success = response.body().getSuccess();
-                    if(success){
-                        Toast.makeText(RegisterActivity.this, response.body()
-                                .getMessage(), Toast.LENGTH_SHORT).show();
-                        finish();
-                    }else{
-                        Toast.makeText(RegisterActivity.this,
-                                response.body().getMessage(), Toast.LENGTH_SHORT).show();
+        apiInterface.registerUser(email,password,name,phone)
+                .enqueue(new Callback<APIResponse>() {
+                    @Override
+                    public void onResponse(Call<APIResponse> call, retrofit2.Response<APIResponse> response) {
+                        APIResponse result = response.body();
+                        if(result.getError()){
+                            Toast.makeText(RegisterActivity.this, result.getErrorMsg(), Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(RegisterActivity.this, "Registration success: UUID:"+ result.getUid(), Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Users> call,@NonNull Throwable t) {
-                Toast.makeText(RegisterActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure(Call<APIResponse> call, Throwable t) {
+                        Toast.makeText(RegisterActivity.this, "Error:" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

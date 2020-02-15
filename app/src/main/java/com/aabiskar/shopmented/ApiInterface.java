@@ -1,5 +1,6 @@
 package com.aabiskar.shopmented;
 
+import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.Banners;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
@@ -36,6 +37,23 @@ public interface ApiInterface {
             @Field("model") String model
     );
 
+    @FormUrlEncoded
+    @POST("login.php")
+    Call<APIResponse> loginUser(
+            @Field("email") String email,@Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("register.php")
+    Call<APIResponse> registerUser(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("name") String name,
+            @Field("phone") String phone
+
+
+
+    );
 
 
 
