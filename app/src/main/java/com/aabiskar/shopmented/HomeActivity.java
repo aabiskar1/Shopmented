@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,11 +19,18 @@ import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.ramotion.foldingcell.FoldingCell;
 
+import java.util.UUID;
+
 import butterknife.BindView;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
 import static com.aabiskar.shopmented.R.color.colorPrimary;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_PHONE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,6 +39,8 @@ public class HomeActivity extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     FlowingDrawer mDrawer;
     FoldingCell foldingcell;
+    private TextView home_usersName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_home_white_24dp));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_home_white_24dp));
         bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_home_white_24dp));
+
+
 
 
         mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
@@ -84,7 +97,6 @@ public class HomeActivity extends AppCompatActivity {
                         // Create new fragment and transaction
                         Fragment ShopFragment = new ShopFragment();
                         FragmentTransaction shoptransaction = getSupportFragmentManager().beginTransaction();
-
 // Replace whatever is in the fragment_container view with this fragment,
 // and add the transaction to the back stack if needed
                         shoptransaction.replace(R.id.homeFragment, ShopFragment);
@@ -116,5 +128,20 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    public void signout(View v){
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_UUID,"");
+        editor.putString(KEY_NAME,"");
+        editor.putString(KEY_EMAIL,"");
+        editor.putString(KEY_PHONE,"");
+        editor.apply();
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+    }
+
+
 
 }

@@ -40,12 +40,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
          //for changing status bar icon colors
+        loadSharedPrefData();
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.activity_login);
-
-        loadSharedPrefData();
 
         changeStatusBarColor();
         setStatusBarGradiant(LoginActivity.this);
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("arguments", item_name);
             finish();
             startActivity(intent);
-            Toast.makeText(getApplicationContext(), String.valueOf(item_name), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getApplicationContext(), String.valueOf(item_name), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -94,7 +93,10 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(KEY_EMAIL,user.getEmail());
                             editor.putString(KEY_PHONE,user.getPhone());
                             editor.apply();
-                            Toast.makeText(LoginActivity.this, "Login success:"+ user.getName(), Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(LoginActivity.this, "Login success:"+ user.getName(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplication(),HomeActivity.class);
+                            startActivity(intent);
+
                         }
                     }
 
@@ -149,10 +151,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     public void loadSharedPrefData(){
         SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
         String uuid = sharedPreferences.getString(KEY_UUID,"");
-        Toast.makeText(this, uuid + " ", Toast.LENGTH_SHORT).show();
+
+        if(!uuid.isEmpty()) {
+            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+            startActivity(intent);
+            //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
+        }
     }
 
 

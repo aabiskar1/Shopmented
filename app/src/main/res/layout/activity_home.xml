@@ -64,7 +64,8 @@
                     android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Test"
+                    android:text="SIGN OUT"
+                    android:onClick="signout"
                     android:textSize="15sp"/>
             </androidx.cardview.widget.CardView>
             <com.ramotion.foldingcell.FoldingCell
