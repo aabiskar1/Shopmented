@@ -17,10 +17,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".BannerLayoutCard"></activity>
+        <activity android:name=".category_productList"></activity>
+        <activity android:name=".BannerLayoutCard" />
         <activity android:name=".product_page" />
         <activity android:name=".SimpleScannerActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:windowSoftInputMode="adjustPan"
+            android:name=".HomeActivity" />
         <activity android:name=".products_card" />
         <activity android:name=".ItemPage" />
         <activity android:name=".content_profile" />

@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.luseen.spacenavigation.SpaceItem;
+import com.luseen.spacenavigation.SpaceNavigationView;
+import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.ramotion.foldingcell.FoldingCell;
@@ -36,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
     //    @BindView(R.id.fluidBottomNavigation)
 //    FluidBottomNavigation bottomNavigation;
-    MeowBottomNavigation bottomNavigation;
+  //  MeowBottomNavigation bottomNavigation;
     FlowingDrawer mDrawer;
     FoldingCell foldingcell;
     private TextView home_usersName;
@@ -50,13 +53,105 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        bottomNavigation = findViewById(R.id.bottom_nav_bar);
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home_white_24dp));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_home_white_24dp));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_home_white_24dp));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_home_white_24dp));
 
 
+        SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.bottom_nav_bar);
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.ic_home_white_24dp));
+        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.ic_search_grey_24dp));
+        spaceNavigationView.addSpaceItem(new SpaceItem("PROFILE", R.drawable.ic_account_circle_white_24dp));
+        spaceNavigationView.addSpaceItem(new SpaceItem("AR", R.drawable.ic_ar_camera));
+        spaceNavigationView.showIconOnly();
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+                Intent intentQR = new Intent(getApplicationContext(),QRScannerActivity.class);
+                startActivity(intentQR);
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+                Toast.makeText(getApplicationContext(), itemIndex + " " + itemName, Toast.LENGTH_SHORT).show();
+
+
+                switch (itemIndex) {
+                    case 0:
+                        // Create new fragment and transaction
+                        Fragment ShopFragment = new ShopFragment();
+                        FragmentTransaction shoptransaction = getSupportFragmentManager().beginTransaction();
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+                        shoptransaction.replace(R.id.homeFragment, ShopFragment);
+                        shoptransaction.addToBackStack(null);
+
+// Commit the transaction
+                        shoptransaction.commit();
+                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(colorPrimary,getTheme()));
+                        break;
+
+                    case 1:
+                        // Create new fragment and transaction
+                        Fragment newFragment = new ProductListFragment();
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+                        transaction.replace(R.id.homeFragment, newFragment);
+                        transaction.addToBackStack(null);
+
+// Commit the transaction
+                        transaction.commit();
+                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(R.color.mint,getTheme()));
+                        break;
+                    case 2:
+                        // Create new fragment and transaction
+                        Fragment profileFragment = new ProfileFragment();
+                        FragmentTransaction transaction_profile = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+                        transaction_profile.replace(R.id.homeFragment, profileFragment);
+                        transaction_profile.addToBackStack(null);
+                        transaction_profile.commit();
+                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(R.color.yellow,getTheme()));
+
+                        break;
+                        case 3:
+                            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.DefaultCompany.ARCoreShopmented");
+                            if (launchIntent != null) {
+                                startActivity(launchIntent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "There is no package available in android", Toast.LENGTH_LONG).show();
+                            }
+                        break;
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+
+            }
+        });
+
+
+//        bottomNavigation = findViewById(R.id.bottom_nav_bar);
+//        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home_white_24dp));
+//        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_home_white_24dp));
+//        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_home_white_24dp));
+//        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_home_white_24dp));
+//        bottomNavigation.show(1,true);
+//        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+//            @Override
+//            public Unit invoke(MeowBottomNavigation.Model model) {
+//                int i = model.getId();
+//                bottomNavigation.show(i,true);
+//                return null;
+//            }
+//        });
 
 
         mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
@@ -84,48 +179,48 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 //        bottomNavigation.setBackgroundColor(getColor(colorPrimary));
-        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-            @Override
-            public Unit invoke(MeowBottomNavigation.Model p1) {
-                int i = p1.getId();
-                switch (i) {
-                    case 4:
-                        Intent intentQR = new Intent(getApplicationContext(),QRScannerActivity.class);
-                        startActivity(intentQR);
-                        break;
-                    case 1:
-                        // Create new fragment and transaction
-                        Fragment ShopFragment = new ShopFragment();
-                        FragmentTransaction shoptransaction = getSupportFragmentManager().beginTransaction();
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack if needed
-                        shoptransaction.replace(R.id.homeFragment, ShopFragment);
-                        shoptransaction.addToBackStack(null);
-
-// Commit the transaction
-                        shoptransaction.commit();
-                        break;
-
-                    case 2:
-                        // Create new fragment and transaction
-                        Fragment newFragment = new ProductListFragment();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack if needed
-                        transaction.replace(R.id.homeFragment, newFragment);
-                        transaction.addToBackStack(null);
-
-// Commit the transaction
-                        transaction.commit();
-                        break;
-                    case 3:
-                        Toast.makeText(getApplicationContext(), "case 3", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                return Unit.INSTANCE;
-            }
-        });
+//        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+//            @Override
+//            public Unit invoke(MeowBottomNavigation.Model p1) {
+//                int i = p1.getId();
+//                switch (i) {
+//                    case 4:
+//                        Intent intentQR = new Intent(getApplicationContext(),QRScannerActivity.class);
+//                        startActivity(intentQR);
+//                        break;
+//                    case 1:
+//                        // Create new fragment and transaction
+//                        Fragment ShopFragment = new ShopFragment();
+//                        FragmentTransaction shoptransaction = getSupportFragmentManager().beginTransaction();
+//// Replace whatever is in the fragment_container view with this fragment,
+//// and add the transaction to the back stack if needed
+//                        shoptransaction.replace(R.id.homeFragment, ShopFragment);
+//                        shoptransaction.addToBackStack(null);
+//
+//// Commit the transaction
+//                        shoptransaction.commit();
+//                        break;
+//
+//                    case 2:
+//                        // Create new fragment and transaction
+//                        Fragment newFragment = new ProductListFragment();
+//                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+//// Replace whatever is in the fragment_container view with this fragment,
+//// and add the transaction to the back stack if needed
+//                        transaction.replace(R.id.homeFragment, newFragment);
+//                        transaction.addToBackStack(null);
+//
+//// Commit the transaction
+//                        transaction.commit();
+//                        break;
+//                    case 3:
+//                        Toast.makeText(getApplicationContext(), "case 3", Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//                return Unit.INSTANCE;
+//            }
+//        });
 
     }
 

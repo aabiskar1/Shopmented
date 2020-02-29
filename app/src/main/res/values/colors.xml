@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#F9861B</color>
-    <color name="lightColorPrimary">#FFAE68</color>
+    <color name="colorPrimary">#26C6DA</color>
+    <color name="lightColorPrimary">#5A87F8</color>
     <color name="colorPrimaryDark">#F9861B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttons">#FD7C0A</color>
     <color name="grey">#D1CACA</color>
+    <color name="yellow">#F5D200</color>
+    <color name="profileCard">#222F55</color>
 
 
     <!--colors for modern ui-->
@@ -41,5 +43,6 @@
     <color name="profileBackground">#fff</color>
     <color name="blackTextColor">#000</color>
     <color name="profileEditTextColor">#707070</color>
+    <color name="mint">#00C8AA</color>
 
 </resources>

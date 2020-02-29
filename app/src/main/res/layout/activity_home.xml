@@ -16,25 +16,35 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_nav_bar">
 
-        <RelativeLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+            <com.luseen.spacenavigation.SpaceNavigationView
                 android:id="@+id/bottom_nav_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="-1dp" />
+                android:layout_gravity="bottom"
+                android:elevation="8dp"
+                app:active_item_color="@color/colorAccent"
+                app:centre_button_color="@color/profileAccentColor"
+                app:centre_button_icon="@drawable/ic_qr_code_scan"
+                app:inactive_item_color="@color/space_white"
+                app:space_background_color="@color/colorPrimary"
+                app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
+                app:space_item_icon_size="@dimen/space_item_icon_default_size"
+                app:space_item_text_size="@dimen/space_item_text_default_size" />
 
             <fragment
+                android:layout_marginBottom="10dp"
                 android:id="@+id/homeFragment"
                 android:name="com.aabiskar.shopmented.ShopFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/bottom_nav_bar" />
+         />
 
-        </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     </FrameLayout>

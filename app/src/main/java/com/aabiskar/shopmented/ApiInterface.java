@@ -38,6 +38,14 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("cate_products.php")
+    Call<ArrayList<Products>> getCateProduct(
+            @Field("post_cate") String post_cate
+    );
+
+
+
+    @FormUrlEncoded
     @POST("login.php")
     Call<APIResponse> loginUser(
             @Field("email") String email,@Field("password") String password
@@ -50,9 +58,6 @@ public interface ApiInterface {
             @Field("password") String password,
             @Field("name") String name,
             @Field("phone") String phone
-
-
-
     );
 
 

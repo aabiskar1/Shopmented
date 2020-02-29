@@ -1,6 +1,7 @@
 package com.aabiskar.shopmented;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class ShopFragment extends Fragment {
     private BannerAdapter adapter;
     RecyclerView recyclerViewBanners;
     private TextView homeUserName;
+    private RelativeLayout sofaCategoryLayout;
 
     public ShopFragment() {
         // Required empty public constructor
@@ -43,8 +46,24 @@ public class ShopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);
+
+
+
+
+        sofaCategoryLayout = v.findViewById(R.id.home_chairLayout);
+        sofaCategoryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),category_productList.class);
+                startActivity(intent);
+            }
+        });
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         recyclerViewBanners.setLayoutManager(linearLayoutManager);
