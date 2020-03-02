@@ -30,7 +30,7 @@
                 app:active_item_color="@color/colorAccent"
                 app:centre_button_color="@color/profileAccentColor"
                 app:centre_button_icon="@drawable/ic_qr_code_scan"
-                app:inactive_item_color="@color/space_white"
+                app:inactive_item_color="@color/white"
                 app:space_background_color="@color/colorPrimary"
                 app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
                 app:space_item_icon_size="@dimen/space_item_icon_default_size"

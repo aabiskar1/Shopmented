@@ -41,7 +41,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="0dp"
             android:layout_marginRight="20dp"
@@ -56,18 +56,9 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Price"
-                    android:textColor="@color/veryLightGrey"
-                    android:textSize="18sp" />
-
-                <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/textView"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="false"
                     android:layout_toLeftOf="@id/product_page_price_tv"
                     android:gravity="center"
@@ -78,49 +69,50 @@
                 <TextView
                     android:id="@+id/product_page_price_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/textView"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
                     android:text="100"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/product_page_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/product_page_price_tv"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="start"
+                    android:text="@string/app_name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/product_page_model_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/product_page_name_tv"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="start"
+                    android:text="@string/app_name"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/product_page_desc_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/product_page_model_tv"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="start"
+                    android:text="@string/app_name"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="18sp" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:elevation="4dp"
-            app:cardCornerRadius="10dp"></androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:elevation="4dp"
-            app:cardCornerRadius="10dp"></androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:elevation="4dp"
-            app:cardCornerRadius="10dp"></androidx.cardview.widget.CardView>
 
 
     </LinearLayout>

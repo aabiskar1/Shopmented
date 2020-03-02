@@ -129,9 +129,17 @@ final Activity activity = this;
                 if(!response.body().isEmpty()) {
                     String product_img_url =  response.body().get(0).getImg_url();
                     String product_price = String.valueOf(response.body().get(0).getPrice());
+                    String product_model = String.valueOf(response.body().get(0).getModel_number());
+                    String product_desc = String.valueOf(response.body().get(0).getDescription());
+                    String product_ar_name = String.valueOf(response.body().get(0).getAr_name());
+                    String product_name = String.valueOf(response.body().get(0).getName());
                     Intent i = new Intent(getApplicationContext(), product_page.class);
                     i.putExtra("img_url",product_img_url);
                     i.putExtra("price",product_price);
+                    i.putExtra("name",product_name);
+                    i.putExtra("model",product_model);
+                    i.putExtra("description",product_desc);
+                    i.putExtra("ar_name",product_ar_name);
                     startActivity(i);
                 }
                 else{

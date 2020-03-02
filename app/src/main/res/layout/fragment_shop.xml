@@ -64,7 +64,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:text="WELCOME, AABISKAR"
-                                android:textColor="@color/whiteTextColor"
+                                android:textColor="@color/white"
                                 android:textSize="24sp" />
 
                             <TextView
@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-condensed-medium"
                                 android:text="What do you wanna buy today?"
-                                android:textColor="@color/whiteTextColor"
+                                android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -130,30 +130,24 @@
             <RelativeLayout
                 android:id="@+id/home_topics_layout"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@id/home_banner_card">
+                android:layout_height="match_parent"
+                android:layout_above="@id/imageView2"
+                android:layout_below="@id/home_banner_card"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
 
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/crimsontextsemibold"
-                    android:text="TRENDING CATEGORIES"
-                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:id="@+id/shop_cat1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textView3"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:elevation="4dp"
                         app:cardCornerRadius="10dp">
@@ -177,11 +171,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerHorizontal="true"
-                                android:layout_marginLeft="-2dp"
                                 android:layout_toRightOf="@id/imageView"
                                 android:gravity="center"
                                 android:text="SOFA"
-                                android:textColor="@color/whiteCardColor"
+                                android:textColor="@color/white"
                                 android:textSize="18sp" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -189,7 +182,6 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:elevation="4dp"
                         app:cardCornerRadius="10dp">
@@ -215,7 +207,163 @@
                                 android:layout_toRightOf="@id/chair_imgView"
                                 android:gravity="center"
                                 android:text="CHAIR"
-                                android:textColor="@color/whiteCardColor"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/shop_cat2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/shop_cat1"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp">
+
+                        <RelativeLayout
+                            android:id="@+id/home_chairLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_sofa" />
+
+                            <TextView
+                                android:id="@+id/textView41"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_toRightOf="@id/imageView1"
+                                android:gravity="center"
+                                android:text="SOFA"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp">
+
+                        <RelativeLayout
+                            android:id="@+id/home_sofaLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="2dp"
+
+                            android:background="@color/colorPrimary">
+
+                            <ImageView
+                                android:id="@+id/chair_imgView1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_010_chair" />
+
+                            <TextView
+                                android:id="@+id/chairLbl1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@id/chair_imgView1"
+                                android:gravity="center"
+                                android:text="CHAIR"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/shop_cat3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/shop_cat2"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp">
+
+                        <RelativeLayout
+                            android:id="@+id/home_chairLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary">
+
+                            <ImageView
+                                android:id="@+id/imageView12"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_sofa" />
+
+                            <TextView
+                                android:id="@+id/textView42"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_toRightOf="@id/imageView12"
+                                android:gravity="center"
+                                android:text="SOFA"
+                                android:textColor="@color/white"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="4dp"
+                        app:cardCornerRadius="10dp">
+
+                        <RelativeLayout
+                            android:id="@+id/home_sofaLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="2dp"
+
+                            android:background="@color/colorPrimary">
+
+                            <ImageView
+                                android:id="@+id/chair_imgView1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_010_chair" />
+
+                            <TextView
+                                android:id="@+id/chairLbl1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toRightOf="@id/chair_imgView1"
+                                android:gravity="center"
+                                android:text="CHAIR"
+                                android:textColor="@color/white"
                                 android:textSize="18sp" />
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -229,6 +377,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
                 android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:src="@drawable/home_banner" />
         </RelativeLayout>
     </ScrollView>

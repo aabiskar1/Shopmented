@@ -101,7 +101,6 @@ public class HomeActivity extends AppCompatActivity {
 
 // Commit the transaction
                         transaction.commit();
-                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(R.color.mint,getTheme()));
                         break;
                     case 2:
                         // Create new fragment and transaction

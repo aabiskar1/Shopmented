@@ -47,7 +47,7 @@ public class ShopFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary,getActivity().getTheme()));
 
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);

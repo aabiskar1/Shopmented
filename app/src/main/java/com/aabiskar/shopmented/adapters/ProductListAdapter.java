@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,8 +42,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
         Products product = products.get(position);
         holder.prodcutName.setText(product.getName());
+        holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));
+
+        Toast.makeText(context, product.getModel_number(), Toast.LENGTH_SHORT).show();
         Picasso.get().load(product.getImg_url()).fit().into(holder.img_view);
-        Log.d("listLog",product.getName());
+
     }
 
     @Override
@@ -59,12 +63,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public  class ProductListViewHolder extends RecyclerView.ViewHolder{
 
-        TextView prodcutName;
+        TextView prodcutName,productPrice;
         ImageView img_view;
 
         public ProductListViewHolder(View itemView, OnProductClickListener listener){
             super(itemView);
             prodcutName = itemView.findViewById(R.id.product_card_product_name_tv);
+            productPrice = itemView.findViewById(R.id.product_card_product_price_tv);
             img_view = itemView.findViewById(R.id.product_card_img_view);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
