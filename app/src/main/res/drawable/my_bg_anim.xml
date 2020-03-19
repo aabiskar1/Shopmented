@@ -3,7 +3,7 @@
 
     <item
         android:drawable="@drawable/gradient2"
-        android:duration="1500"/>
+        android:duration="2500"/>
 
     <item
         android:drawable="@drawable/gradient4"

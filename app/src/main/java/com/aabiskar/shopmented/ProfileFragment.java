@@ -40,7 +40,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.yellow,getActivity().getTheme()));
+//        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.yellow,getActivity().getTheme()));
         View v = inflater.inflate(R.layout.fragment_profile, container, false);;
         qrImgView = v.findViewById(R.id.profile_qr_imgview);
 

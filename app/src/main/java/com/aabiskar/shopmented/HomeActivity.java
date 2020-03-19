@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     case 1:
                         // Create new fragment and transaction
-                        Fragment newFragment = new ProductListFragment();
+                        Fragment newFragment = new ShopCategoryMainFragment();
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 // Replace whatever is in the fragment_container view with this fragment,
@@ -112,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
                         transaction_profile.replace(R.id.homeFragment, profileFragment);
                         transaction_profile.addToBackStack(null);
                         transaction_profile.commit();
-                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(R.color.yellow,getTheme()));
+
 
                         break;
                         case 3:
