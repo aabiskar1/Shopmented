@@ -92,6 +92,7 @@ public class ProductListFragment extends Fragment {
                 String product_description = productsList.get(position).getDescription().toString();
                 String product_category = productsList.get(position).getCategory().toString();
                 String product_price = String.valueOf(productsList.get(position).getPrice());
+                String product_id = String.valueOf(productsList.get(position).getId());
                 if(productsList.get(position).getAr_name()!=null){
                 ar_name = productsList.get(position).getAr_name();
                 }
@@ -102,6 +103,7 @@ public class ProductListFragment extends Fragment {
                 i.putExtra("name",product_name);
                 i.putExtra("model",product_model);
                 i.putExtra("description",product_description);
+                i.putExtra("product_id",product_id);
                 if(productsList.get(position).getAr_name()!=null){
                     i.putExtra("ar_name",ar_name);
                 }

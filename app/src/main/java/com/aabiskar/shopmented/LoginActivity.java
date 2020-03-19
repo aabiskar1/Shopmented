@@ -1,12 +1,14 @@
 package com.aabiskar.shopmented;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aabiskar.shopmented.models.APIResponse;
@@ -32,21 +36,37 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class LoginActivity extends AppCompatActivity {
+
+
+    private RelativeLayout loginLayout;
+    private AnimationDrawable animationDrawable,animationDrawableReverse;
     private EditText email_et;
     private EditText password_et;
     private br.com.simplepass.loading_button_lib.customViews.CircularProgressButton login_btn;
     public ApiInterface apiInterface;
+    private LinearLayout loginCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
         super.onCreate(savedInstanceState);
          //for changing status bar icon colors
         loadSharedPrefData();
+
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.activity_login);
 
-        changeStatusBarColor();
+        loginLayout =  findViewById(R.id.login_main_layout);
+        loginCard =  findViewById(R.id.login_cardView);
+        animationDrawable = (AnimationDrawable) loginLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1500);
+        animationDrawable.setExitFadeDuration(1500);
+        animationDrawable.start();
+
+
+
+//        changeStatusBarColor();
         setStatusBarGradiant(LoginActivity.this);
         Bundle extras = getIntent().getExtras();
         String item_name;
@@ -54,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         email_et = findViewById(R.id.login_editTextEmail);
         password_et = findViewById(R.id.login_teditTextPassword);
+
         login_btn = findViewById(R.id.cirLoginButton);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
-            window.setStatusBarColor(getResources().getColor(R.color.register_bk_color,getTheme()));
+
         }
     }
 
@@ -139,17 +160,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarGradiant(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.color.whiteCardColor);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
-        }
-    }
+
+
 
 
     public void loadSharedPrefData(){
@@ -162,6 +174,19 @@ public class LoginActivity extends AppCompatActivity {
             //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
         }
     }
+
+
+        public static void setStatusBarGradiant(Activity activity) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = activity.getWindow();
+                Drawable background = activity.getResources().getDrawable(R.drawable.my_bg_anim,activity.getTheme());
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent,activity.getTheme()));
+                window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent,activity.getTheme()));
+                window.setBackgroundDrawable(background);
+            }
+        }
+
 
 
 }

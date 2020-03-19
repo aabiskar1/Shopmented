@@ -3,8 +3,11 @@ package com.aabiskar.shopmented;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.aabiskar.shopmented.models.APIResponse;
@@ -39,13 +43,24 @@ import retrofit2.Callback;
 public class RegisterActivity extends AppCompatActivity {
 private EditText name,email,mobile_number,password;
 private static String URL_REGIST = "http://192.168.31.117:8082/shopmented/register.php";
+private AnimationDrawable animationDrawable,animationDrawableReverse;
+private RelativeLayout mainLayout;
 public ApiInterface apiInterface;
 private CircularProgressButton registerBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_register);
-        changeStatusBarColor();
+        mainLayout = findViewById(R.id.register_main);
+        animationDrawable = (AnimationDrawable) mainLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1500);
+        animationDrawable.setExitFadeDuration(1500);
+        animationDrawable.start();
+
+
+        changeStatusBarColor(this);
 
         registerBtn = findViewById(R.id.cirRegisterButton);
 
@@ -53,6 +68,7 @@ private CircularProgressButton registerBtn;
         password = findViewById(R.id.register_editTextPassword);
         email = findViewById(R.id.register_editTextEmail);
         mobile_number = findViewById(R.id.register_editTextMobile);
+
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,12 +86,13 @@ private CircularProgressButton registerBtn;
 
     }
 
-    private void changeStatusBarColor() {
+    private void changeStatusBarColor(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.my_bg_anim,activity.getTheme());
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setStatusBarColor(getResources().getColor(R.color.register_bk_color));
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent,activity.getTheme()));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent,activity.getTheme()));
         }
     }
 

@@ -39,7 +39,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="right"
                     android:elevation="18dp"
-                    android:src="@drawable/sunshine" />
+                    android:src="@drawable/sungiftransparent2" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

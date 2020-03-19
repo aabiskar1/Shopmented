@@ -43,6 +43,7 @@ public class product_page extends AppCompatActivity {
             String model = extras.getString("model");
             String description = extras.getString("description");
             String name = extras.getString("name");
+            String product_id = extras.getString("product_id");
             product_price.setText(price);
             product_name.setText(name);
             product_model.setText(model);
@@ -52,5 +53,9 @@ public class product_page extends AppCompatActivity {
             Toast.makeText(this, model + "mode is", Toast.LENGTH_SHORT).show();
 
         }
+    }
+    private void addToCart(){
+
+
     }
 }

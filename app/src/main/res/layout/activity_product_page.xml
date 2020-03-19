@@ -128,6 +128,7 @@
             style="@style/RoundedButton"
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:drawableLeft="@drawable/buy"
+            android:hapticFeedbackEnabled="true"
             android:text="ADD TO CART"
             android:textColor="@color/black"
             app:initialCornerAngle="27dp"
