@@ -46,7 +46,7 @@ public class category_productList extends AppCompatActivity {
         call.enqueue(new Callback<ArrayList<Products>>() {
             @Override
             public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
-                Toast.makeText(getApplicationContext().getApplicationContext(), "got response", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext().getApplicationContext(), "got response", Toast.LENGTH_SHORT).show();
                 generateDataList(response.body());
             }
 

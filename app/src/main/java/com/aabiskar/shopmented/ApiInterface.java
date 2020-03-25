@@ -2,6 +2,8 @@ package com.aabiskar.shopmented;
 
 import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.Banners;
+import com.aabiskar.shopmented.models.Cart;
+import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
 
@@ -59,6 +61,23 @@ public interface ApiInterface {
             @Field("name") String name,
             @Field("phone") String phone
     );
+
+    @FormUrlEncoded
+    @POST("getCartDetails.php")
+    Call<ArrayList<Cart>> getCartList(
+            @Field("customer_id") int customer_id
+    );
+
+
+    @FormUrlEncoded
+    @POST("cart/insertIntoCart.php")
+    Call<CartInsert> insertCart(
+            @Field("product_id") int product_id,
+            @Field("customer_id") int customer_id
+
+    );
+
+
 
 
 

@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 
 public class ProductListFragment extends Fragment {
-    public ApiInterface apiInterface;
+    private ApiInterface apiInterface;
     private ProductListAdapter adapter;
 
     RecyclerView recyclerViewProductsList;
@@ -64,7 +64,7 @@ public class ProductListFragment extends Fragment {
         call.enqueue(new Callback<ArrayList<Products>>() {
             @Override
             public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
-                Toast.makeText(getActivity().getApplicationContext(), "got response", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "got response", Toast.LENGTH_SHORT).show();
                 generateDataList(response.body());
             }
 

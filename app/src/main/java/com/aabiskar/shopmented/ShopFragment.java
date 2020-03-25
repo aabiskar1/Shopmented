@@ -32,7 +32,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class ShopFragment extends Fragment {
-    public ApiInterface apiInterface;
+    private ApiInterface apiInterface;
     private BannerAdapter adapter;
     RecyclerView recyclerViewBanners;
     private TextView homeUserName;

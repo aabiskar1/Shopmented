@@ -37,7 +37,7 @@
                 app:space_item_text_size="@dimen/space_item_text_default_size" />
 
             <fragment
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/view_bottom_margin"
                 android:id="@+id/homeFragment"
                 android:name="com.aabiskar.shopmented.ShopFragment"
                 android:layout_width="match_parent"

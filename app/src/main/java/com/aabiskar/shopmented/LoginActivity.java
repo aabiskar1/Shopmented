@@ -12,7 +12,10 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,8 +26,12 @@ import android.widget.Toast;
 
 import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.User;
+import com.aabiskar.shopmented.models.Users;
+
+import java.io.IOException;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import pl.droidsonroids.gif.GifDrawable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +40,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_PHONE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class LoginActivity extends AppCompatActivity {
@@ -93,6 +101,39 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
            // Toast.makeText(getApplicationContext(), String.valueOf(item_name), Toast.LENGTH_SHORT).show();
         }
+
+        GifDrawable gifstatus = null;
+
+        try {
+            gifstatus = new GifDrawable( getResources(), R.drawable.dual_ball );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GifDrawable isGif= gifstatus;
+
+        email_et.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                email_et.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null, isGif,null);
+
+            }else {
+                email_et.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null, null,null);
+
+            }
+
+        });
+        password_et.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus){
+                password_et.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null, isGif,null);
+
+            }else {
+                password_et.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null, null,null);
+
+            }
+
+        });
+
+
     }
 
     private void authUser(String emailTxt, String passwordTxt) {
@@ -107,9 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else{
                             User user = response.body().getUser();
+
                             SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(KEY_UUID,result.getUid());
+                            editor.putInt(KEY_USER_ID,result.getUser().getId());
                             editor.putString(KEY_NAME,user.getName());
                             editor.putString(KEY_EMAIL,user.getEmail());
                             editor.putString(KEY_PHONE,user.getPhone());

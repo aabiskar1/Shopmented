@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             android:padding="20dp">
 
             <RelativeLayout
@@ -60,7 +61,7 @@
                         android:hapticFeedbackEnabled="true"
                         app:errorEnabled="true">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/login_editTextEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -80,7 +81,7 @@
                         android:hapticFeedbackEnabled="true"
                         app:errorEnabled="true">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
 
                             android:id="@+id/login_teditTextPassword"
                             android:layout_width="match_parent"

@@ -69,6 +69,7 @@ public class ShopCategoryMainFragment extends Fragment {
         SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new CategoryFragment(),"Categories");
         adapter.addFragment(new ProductListFragment(),"Products");
+        adapter.addFragment(new CartFragment(),"Cart");
         viewPager.setAdapter(adapter);
 
     }
