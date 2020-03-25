@@ -88,7 +88,18 @@ public class CartFragment extends Fragment {
 
         adapter = new CartListAdapter(getActivity().getApplicationContext(),productsList);
         recyclerViewCartList.setAdapter(adapter);
-           }
+        adapter.setOnProductClicklistener(new CartListAdapter.OnProductClickListener() {
+            @Override
+            public void onProductClick(int position) {
+                getFragmentManager().beginTransaction().detach(CartFragment.this).attach(CartFragment.this).commit();
+                getData();
+
+            }
+        });
+
+
+
+    }
 
 
 }

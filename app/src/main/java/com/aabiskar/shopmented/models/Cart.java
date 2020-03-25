@@ -8,6 +8,11 @@ public class Cart {
     @SerializedName("product_id")
     @Expose
     private String productId;
+
+    @SerializedName("quantity")
+    @Expose
+    private String quantity;
+
     @SerializedName("product_name")
     @Expose
     private String productName;
@@ -33,6 +38,13 @@ public class Cart {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+ public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getProductName() {

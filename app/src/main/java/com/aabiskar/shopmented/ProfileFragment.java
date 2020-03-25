@@ -1,5 +1,7 @@
 package com.aabiskar.shopmented;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
@@ -24,6 +26,11 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,8 +51,8 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);;
         qrImgView = v.findViewById(R.id.profile_qr_imgview);
 
+        loadSharedPrefData();
 
-        genQR("123",qrImgView);
         return v;
 
     }
@@ -63,4 +70,14 @@ public class ProfileFragment extends Fragment {
             }
         }
 
+    private void loadSharedPrefData() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS, MODE_PRIVATE);
+        String uuid = sharedPreferences.getString(KEY_UUID, "");
+        int user_id = sharedPreferences.getInt(KEY_USER_ID, 0);
+        String user_id_qr = user_id+"";
+        if (!uuid.isEmpty()) {
+            genQR(user_id_qr,qrImgView);
+            //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

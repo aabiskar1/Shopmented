@@ -62,7 +62,11 @@ public class ShopCategoryMainFragment extends Fragment {
 
             }
         });
-        
+
+        tabLayout.getTabAt(0).setText("Categories");
+        tabLayout.getTabAt(1).setText("Products");
+        tabLayout.getTabAt(2).setText("Cart");
+
     }
 
     private void setUpViewPager(ViewPager viewPager) {

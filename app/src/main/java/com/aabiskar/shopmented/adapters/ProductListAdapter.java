@@ -90,4 +90,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void setOnProductClicklistener(OnProductClickListener listener){
         mListener = listener;
     }
+
+
+
 }

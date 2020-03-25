@@ -17,13 +17,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".UserQROnly"></activity>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".category_productList" />
         <activity android:name=".BannerLayoutCard" />
@@ -31,6 +31,7 @@
         <activity android:name=".SimpleScannerActivity" />
         <activity
             android:name=".HomeActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".products_card" />
         <activity android:name=".ItemPage" />
@@ -47,9 +48,7 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".MainActivity" />
     </application>
 

@@ -63,7 +63,7 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("getCartDetails.php")
+    @POST("cart/getCartDetails.php")
     Call<ArrayList<Cart>> getCartList(
             @Field("customer_id") int customer_id
     );
@@ -76,6 +76,16 @@ public interface ApiInterface {
             @Field("customer_id") int customer_id
 
     );
+
+    @FormUrlEncoded
+    @POST("cart/updateCartQty.php")
+    Call<CartInsert> updateCartQty(
+            @Field("product_id") int product_id,
+            @Field("customer_id") int customer_id,
+            @Field("quantity") int quantity
+
+    );
+
 
 
 
