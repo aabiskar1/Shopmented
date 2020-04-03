@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".vbucksConfirmationPage">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/confirm_page_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/confirm_pay_calc">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/confirm_pay_calc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@id/authorize_pay_btn"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/confirm_low_balance_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_balance_value"
+            android:layout_alignParentRight="true"
+            android:text="* not enough VBucks in your wallet"
+            android:textColor="@color/logoutRed"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/confirm_pay_amount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/confirm_vbucks_amt_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_pay_amount"
+            android:layout_alignParentRight="true"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/confirm_balance_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_vbucks_amt"
+            android:layout_alignParentRight="true"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/confirm_pay_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pay Amount(Rs.):" />
+
+        <TextView
+            android:id="@+id/confirm_vbucks_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_pay_amount"
+            android:text="Current VBucks:" />
+
+        <TextView
+            android:id="@+id/confirm_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_vbucks_amt"
+            android:text="Balance:" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/authorize_pay_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="PAY"
+        android:visibility="gone" />
+</RelativeLayout>

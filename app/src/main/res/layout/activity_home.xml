@@ -65,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.cardview.widget.CardView
+                android:id="@+id/side_nav_card1"
                 android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -77,6 +78,23 @@
                     android:text="SIGN OUT"
                     android:onClick="signout"
                     android:textSize="15sp"/>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_below="@id/side_nav_card1"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/loadVbucksSideNav"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="VBucks Loader"
+                    android:onClick="openLoadBucksActivity"
+                    android:textSize="15sp"/>
+
             </androidx.cardview.widget.CardView>
             <com.ramotion.foldingcell.FoldingCell
                 android:layout_alignParentBottom="true"

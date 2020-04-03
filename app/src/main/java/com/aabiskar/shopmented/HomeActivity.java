@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 
 import com.aabiskar.shopmented.adapters.CartListAdapter;
+import com.aabiskar.shopmented.staff.LoadVBucks;
 import com.crashlytics.android.Crashlytics;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.luseen.spacenavigation.SpaceItem;
@@ -244,6 +245,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void openLoadBucksActivity(View v){
+        Intent vBucksintent = new Intent(this, LoadVBucks.class);
+        startActivity(vBucksintent);
+    }
 
 
 

@@ -8,6 +8,12 @@ public class User {
     @SerializedName("id")
     @Expose
     private int id;
+    @SerializedName("role_id")
+    @Expose
+    private int role_id;
+    @SerializedName("status_id")
+    @Expose
+    private int status_id;
 
     @SerializedName("name")
     @Expose
@@ -38,6 +44,19 @@ public class User {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public int getRole_id() {
+        return role_id;
+    }
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public int getStatus_id() {
+        return status_id;
+    }
+    public void setStatus_id(int status_id) {
+        this.status_id = status_id;
     }
 
     public String getName() {

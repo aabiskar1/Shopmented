@@ -3,9 +3,12 @@ package com.aabiskar.shopmented;
 import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.Banners;
 import com.aabiskar.shopmented.models.Cart;
+import com.aabiskar.shopmented.models.CartAmount;
 import com.aabiskar.shopmented.models.CartInsert;
+import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
+import com.aabiskar.shopmented.models.VBucks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +76,15 @@ public interface ApiInterface {
     @POST("cart/insertIntoCart.php")
     Call<CartInsert> insertCart(
             @Field("product_id") int product_id,
-            @Field("customer_id") int customer_id
+            @Field("customer_id") int customer_id,
+            @Field("quantity") int quantity
+    );
 
+    @FormUrlEncoded
+    @POST("cart/deleteFromCart.php")
+    Call<CartInsert> deleteFromCart(
+            @Field("product_id") int product_id,
+            @Field("customer_id") int customer_id
     );
 
     @FormUrlEncoded
@@ -86,7 +96,38 @@ public interface ApiInterface {
 
     );
 
+    @FormUrlEncoded
+    @POST("cart/getCartTotalAmount.php")
+    Call<ArrayList<CartAmount>> getTotalCartAmount(
+            @Field("customer_id") int customer_id
+    );
 
+
+    @FormUrlEncoded
+    @POST("payment/getUserVBucks.php")
+    Call<ArrayList<VBucks>> getUserVBucks(
+            @Field("customer_id") int customer_id
+    );
+
+    @FormUrlEncoded
+    @POST("payment/loadIntoVBucks.php")
+    Call<CartInsert> loadVBucks(
+            @Field("customer_id") int customer_id,
+            @Field("amount") Double amount
+    );
+
+    @FormUrlEncoded
+    @POST("order/createOrder.php")
+    Call<OrderResponse> createOrder(
+            @Field("customer_id") int customer_id,
+            @Field("transaction_total_amt") Double transaction_total_amt,
+            @Field("shipping_address") String shipping_address,
+            @Field("status_id") String status_id,
+            @Field("transaction_id") String transaction_id,
+            @Field("transaction_mode") String transaction_mode,
+            @Field("transaction_date") String transaction_date,
+            @Field("transaction_status") String transaction_status
+    );
 
 
 

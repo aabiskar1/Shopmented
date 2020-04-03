@@ -3,7 +3,7 @@ package com.aabiskar.shopmented.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CartInsert {
+public class OrderResponse {
 
     @SerializedName("success")
     @Expose
@@ -27,5 +27,4 @@ public class CartInsert {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

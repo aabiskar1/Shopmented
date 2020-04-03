@@ -44,7 +44,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.prodcutName.setText(product.getName());
         holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));
 
-        Toast.makeText(context, product.getModel_number(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, product.getModel_number(), Toast.LENGTH_SHORT).show();
         Picasso.get().load(product.getImg_url()).fit().into(holder.img_view);
 
     }

@@ -25,7 +25,7 @@ public class Products{
 
     @SerializedName("price")
     @Expose
-    private int price;
+    private String price;
 
     @SerializedName("category")
     @Expose
@@ -42,7 +42,7 @@ public class Products{
     @Expose
     @SerializedName("message") private String message;
 
-    public Products(int id, String ar_name, String name, String model_number, int price, String category, String description, String img_url, Boolean success, String message) {
+    public Products(int id, String ar_name, String name, String model_number, String price, String category, String description, String img_url, Boolean success, String message) {
         this.id = id;
         this.ar_name = ar_name;
         this.name = name;
@@ -87,11 +87,11 @@ public class Products{
         this.model_number = model_number;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

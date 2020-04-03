@@ -62,9 +62,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
         holder.qty_tv.setText(String.valueOf(product.getQuantity()));
 //        Toast.makeText(context, product.getModelNumber(), Toast.LENGTH_SHORT).show();
         Picasso.get().load(product.getImgUrl()).fit().into(holder.img_view);
-       int intQty = Integer.parseInt( holder.qty_tv.getText().toString())*
-               Integer.parseInt( product.getPrice());
-        Toast.makeText(context, intQty+": total", Toast.LENGTH_SHORT).show();
+//        Double intQty = Integer.parseInt( holder.qty_tv.getText().toString())*
+//               Double.parseDouble( product.getPrice());
+//        Toast.makeText(context, intQty+": total", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -82,7 +82,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
 
     public  class ProductListViewHolder extends RecyclerView.ViewHolder{
 
-        TextView prodcutName,productPrice,qty_tv;
+        TextView prodcutName,productPrice,qty_tv,removeBtn;
         ImageView img_view,plus_count,minus_count;
 
 
@@ -94,6 +94,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
             minus_count = itemView.findViewById(R.id.cart_item_qty_minus);
             plus_count = itemView.findViewById(R.id.cart_item_qty_plus);
             qty_tv = itemView.findViewById(R.id.cart_item_qty_tv);
+            removeBtn = itemView.findViewById(R.id.removeItemBtn);
 
 
 
@@ -141,6 +142,23 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
                 }
             });
 
+            removeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onProductClick(position);
+                            Cart product = products.get(position);
+
+                                deleteItem(Integer.parseInt(product.getProductId()));
+
+
+                        }
+                    }
+                }
+            });
+
         }
     }
     public interface  OnProductClickListener{
@@ -175,6 +193,25 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
                 Toast.makeText(context, "in error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void deleteItem(int product_id){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterface.deleteFromCart(product_id,customer_id).enqueue(new Callback<CartInsert>() {
+            @Override
+            public void onResponse(Call<CartInsert> call, Response<CartInsert> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<CartInsert> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
 

@@ -45,6 +45,16 @@ public class product_page extends AppCompatActivity {
     @BindView(R.id.product_page_desc_tv)
     TextView product_desc;
 
+    @BindView(R.id.item_page_qty_plus)
+    ImageView item_qty_plus_btn;
+
+    @BindView(R.id.item_page_qty_minus)
+    ImageView item_qty_minus_btn;
+
+
+    private TextView item_qty_tv;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +63,8 @@ public class product_page extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         ButterKnife.bind(this);
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary,getTheme()));
+
+        item_qty_tv = findViewById(R.id.item_page_qty_tv);
 
         if (extras != null) {
             String img_url = extras.getString("img_url");
@@ -68,6 +80,18 @@ public class product_page extends AppCompatActivity {
 
             Picasso.get().load(img_url).fit().into(product_img);
 //            Toast.makeText(this, model + "mode is", Toast.LENGTH_SHORT).show();
+            item_qty_minus_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    decreaseQty(item_qty_tv);
+                }
+            });
+            item_qty_plus_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    increaseQty(item_qty_tv);
+                }
+            });
 
         }
     }
@@ -82,7 +106,7 @@ public class product_page extends AppCompatActivity {
             System.out.println("Could not parse " + nfe);
         }
 
-        apiInterface.insertCart(int_productID,customer_id).enqueue(new Callback<CartInsert>() {
+        apiInterface.insertCart(int_productID,customer_id,Integer.parseInt(item_qty_tv.getText().toString())).enqueue(new Callback<CartInsert>() {
             @Override
             public void onResponse(Call<CartInsert> call, Response<CartInsert> response) {
 
@@ -95,7 +119,7 @@ public class product_page extends AppCompatActivity {
                     String sentence =  response.body().getMessage();
                     String search  = "duplicate entry";
 
-                    if ( sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
+                    if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
                         Toast.makeText(product_page.this,   "already in cart", Toast.LENGTH_SHORT).show();
 
 
@@ -117,6 +141,21 @@ public class product_page extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void increaseQty(TextView textView){
+        int qty_text= Integer.parseInt(textView.getText().toString());
+        if(qty_text<99){
+            int increased = qty_text+1;
+            textView.setText( String.valueOf(increased));
+        }
+    }
+    private void decreaseQty(TextView textView){
+        int qty_text= Integer.parseInt(textView.getText().toString());
+        if(qty_text>1){
+            int decreased = qty_text-1;
+            textView.setText(String.valueOf(decreased));
+        }
     }
 
 

@@ -17,7 +17,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UserQROnly"></activity>
+        <activity android:name=".OrderCompletePage"></activity>
+        <activity android:name=".vbucksConfirmationPage" />
+        <activity android:name=".PaymentOption" />
+        <activity android:name=".staff.LoadVBucks" />
+        <activity android:name=".UserQROnly" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +52,7 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".MainActivity" />
     </application>
 

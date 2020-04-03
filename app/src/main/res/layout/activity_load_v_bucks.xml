@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".staff.LoadVBucks">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vBucks_load_customer_id"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/space_transparent"
+        android:hapticFeedbackEnabled="true"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vBucks_load_customer_id_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hapticFeedbackEnabled="true"
+            android:hint="Customer ID"
+            android:inputType="number"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/vBucks_load_amount"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/space_transparent"
+        android:hapticFeedbackEnabled="true"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/vBucks_load_amount_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hapticFeedbackEnabled="true"
+            android:hint="Amount"
+            android:inputType="number"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/vBucks_load_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOAD" />
+
+
+</LinearLayout>
