@@ -6,14 +6,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".OrderCompletePage">
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+
+    <TextView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="ORDER COMPLETED"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/order_complete__order_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order ID:" />
+
+    <TextView
+        android:id="@+id/order_complete_date_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date Time: " />
+
+    <TextView
+        android:id="@+id/order_complete_transcation_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction Mode:" />
+
+    <TextView
+        android:id="@+id/order_complete_transaction_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction ID:" />
+
+    <TextView
+        android:id="@+id/order_complete_total_paid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Paid:" />
+
+    <com.airbnb.lottie.LottieAnimationView
+
+        android:id="@+id/done_animation_view"
+
+
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="400dp"
         app:lottie_loop="false"
         app:lottie_autoPlay="true"
-        app:lottie_speed="0.5"
-            app:lottie_fileName="works_done_blue.json"
+        app:lottie_speed="0.4"
+            app:lottie_fileName="works_done.json"
  />
+
+    <Button
+        android:id="@+id/order_complete_done_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="DONE" />
 
 </LinearLayout>

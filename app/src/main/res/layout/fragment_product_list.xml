@@ -65,24 +65,7 @@
                                 android:layout_marginRight="2dp"
                                 android:layout_weight="1"
                                 android:elevation="8dp"
-                                android:padding="5dp">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="match_parent"
-                                    android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
-                                    android:src="@drawable/ic_more_dots_120dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="start|center_vertical"
-                                    android:text="CATEGORIES"
-                                    android:textColor="@color/whiteCardColor"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>
+                                android:padding="5dp"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -108,24 +91,7 @@
                                 android:layout_marginRight="2dp"
                                 android:layout_weight="1"
                                 android:elevation="8dp"
-                                android:padding="5dp">
-
-                                <ImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="match_parent"
-                                    android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
-                                    android:src="@drawable/ic_more_dots_120dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="start|center_vertical"
-                                    android:text="BRANDS"
-                                    android:textColor="@color/whiteCardColor"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>
+                                android:padding="5dp"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>

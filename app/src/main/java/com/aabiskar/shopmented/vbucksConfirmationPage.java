@@ -182,8 +182,8 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private void createOrder(){
 
-        UUID uuid = UUID.randomUUID();
-
+        UUID uuid_transaction = UUID.randomUUID();
+        UUID uuid_order = UUID.randomUUID();
 
         java.util.Date dt = new java.util.Date();
 
@@ -200,15 +200,19 @@ public class vbucksConfirmationPage extends AppCompatActivity {
         apiInterface =  ApiClient.getApiClient().create(ApiInterface.class);
 
         apiInterface.createOrder(customer_id,Double.parseDouble(String.valueOf(pay_amt)),
-                "ktm","4",uuid.toString(),payment_mode,currentTime,"4")
+                "ktm","4",uuid_order.toString(),uuid_transaction.toString(),payment_mode,currentTime,"4")
                 .enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                     if(response.isSuccessful()){
                      if(response.body().getSuccess().equals("1")){
                          Toast.makeText(vbucksConfirmationPage.this, "Order Completed", Toast.LENGTH_SHORT).show();
-                         Intent intent_home = new Intent(getApplicationContext(),HomeActivity.class);
-                         intent_home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                         Intent intent_home = new Intent(getApplicationContext(),OrderCompletePage.class);
+                         intent_home.putExtra("transaction_id",uuid_transaction.toString());
+                         intent_home.putExtra("order_id",uuid_order.toString());
+                         intent_home.putExtra("dateTime",currentTime);
+                         intent_home.putExtra("transaction_mode",payment_mode);
+                         intent_home.putExtra("totalPaid",String.valueOf(pay_amt));
                          startActivity(intent_home);
                      }
                      else{

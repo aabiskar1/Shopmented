@@ -123,6 +123,7 @@ public interface ApiInterface {
             @Field("transaction_total_amt") Double transaction_total_amt,
             @Field("shipping_address") String shipping_address,
             @Field("status_id") String status_id,
+            @Field("order_id") String order_id,
             @Field("transaction_id") String transaction_id,
             @Field("transaction_mode") String transaction_mode,
             @Field("transaction_date") String transaction_date,

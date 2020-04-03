@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         splash_logo = findViewById(R.id.splashscreen_logo);
-        fromTop = AnimationUtils.loadAnimation(this,R.anim.from_top);
+        fromTop = AnimationUtils.loadAnimation(this,R.anim.popin);
         splash_logo.setAnimation(fromTop);
         fromTop.setAnimationListener(new Animation.AnimationListener() {
             @Override
