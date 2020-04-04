@@ -120,6 +120,7 @@ public interface ApiInterface {
     @POST("order/createOrder.php")
     Call<OrderResponse> createOrder(
             @Field("customer_id") int customer_id,
+            @Field("role_id") int role_id,
             @Field("transaction_total_amt") Double transaction_total_amt,
             @Field("shipping_address") String shipping_address,
             @Field("status_id") String status_id,

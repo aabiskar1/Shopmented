@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,25 +19,29 @@ import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.VBucks;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
-import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_CUSTOMER_ROLE_ID_VALUE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
+
 
 public class vbucksConfirmationPage extends AppCompatActivity {
     private ConfirmListAdapter adapter;
     private TextView vbucks_tv;
     private TextView pay_amount_tv;
     private TextView balance_tv;
-    private double vBucksAmt,pay_amt;
+    private double vBucksAmt=0.00,pay_amt;
     private RecyclerView recyclerViewItemsList;
     private Button authorizePaymentBtn;
     private TextView low_balance_text;
     private String payment_mode;
+    private int customer_id;
+    private int role_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +58,20 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
         if (extras != null) {
             payment_mode = extras.getString("pay_method");
+            customer_id = Integer.parseInt(Objects.requireNonNull(extras.getString("customer_id")));
+            role_id = Integer.parseInt(Objects.requireNonNull(extras.getString(KEY_ROLE_ID)));
+            Toast.makeText(this, role_id + "mrole", Toast.LENGTH_SHORT).show();
             // and get whatever type user account id is
         }
 
 
 
-
+        if(role_id==KEY_CUSTOMER_ROLE_ID_VALUE){
         getUserVBucks();
+        }
+        else{
+            getTotalCartAmount();
+        }
         getData();
 
 
@@ -79,8 +89,6 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private  void getUserVBucks(){
         ApiInterface apiInterfaceVBucks;
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
-        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
 
         apiInterfaceVBucks =  ApiClient.getApiClient().create(ApiInterface.class);
         apiInterfaceVBucks.getUserVBucks(customer_id).enqueue(new Callback<ArrayList<VBucks>>() {
@@ -108,9 +116,6 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private  void getTotalCartAmount(){
         ApiInterface apiInterface;
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
-        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
-
         apiInterface =  ApiClient.getApiClient().create(ApiInterface.class);
         apiInterface.getTotalCartAmount(customer_id).enqueue(new Callback<ArrayList<CartAmount>>() {
             @Override
@@ -137,13 +142,18 @@ public class vbucksConfirmationPage extends AppCompatActivity {
     private void calcBalance(){
         double balance = vBucksAmt - pay_amt;
         balance_tv.setText(String.valueOf(balance));
-        if(balance>=0){
-            authorizePaymentBtn.setVisibility(View.VISIBLE);
-            low_balance_text.setVisibility(View.GONE);
+        if(role_id==KEY_CUSTOMER_ROLE_ID_VALUE) {
+            if (balance >= 0) {
+                authorizePaymentBtn.setVisibility(View.VISIBLE);
+                low_balance_text.setVisibility(View.GONE);
+            } else {
+                authorizePaymentBtn.setVisibility(View.GONE);
+                low_balance_text.setVisibility(View.VISIBLE);
+            }
         }
         else{
-            authorizePaymentBtn.setVisibility(View.GONE);
-            low_balance_text.setVisibility(View.VISIBLE);
+            authorizePaymentBtn.setVisibility(View.VISIBLE);
+            low_balance_text.setVisibility(View.GONE);
         }
     }
 
@@ -151,8 +161,6 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private void getData(){
         ApiInterface apiInterface;
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
-        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ArrayList<Cart>> call =  apiInterface.getCartList(customer_id);
         call.enqueue(new Callback<ArrayList<Cart>>() {
@@ -194,12 +202,9 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
 
         ApiInterface apiInterface;
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
-        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
-
         apiInterface =  ApiClient.getApiClient().create(ApiInterface.class);
 
-        apiInterface.createOrder(customer_id,Double.parseDouble(String.valueOf(pay_amt)),
+        apiInterface.createOrder(customer_id,role_id,Double.parseDouble(String.valueOf(pay_amt)),
                 "ktm","4",uuid_order.toString(),uuid_transaction.toString(),payment_mode,currentTime,"4")
                 .enqueue(new Callback<OrderResponse>() {
             @Override

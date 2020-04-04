@@ -2,6 +2,7 @@ package com.aabiskar.shopmented;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STAFF_ROLE_ID_VALUE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
+
 public class QRScannerActivity extends AppCompatActivity {
 
     private static final String TAG = QRScannerActivity.class.getSimpleName();
@@ -39,6 +45,7 @@ public class QRScannerActivity extends AppCompatActivity {
     private BeepManager beepManager;
     private String lastText;
     public ApiInterface apiInterface;
+    int role_id;
 final Activity activity = this;
 
 
@@ -54,10 +61,20 @@ final Activity activity = this;
             barcodeView.setStatusText(result.getText());
 
 
-            getProduct(result.getText());
+            if(role_id== KEY_STAFF_ROLE_ID_VALUE){
 
-            beepManager.playBeepSoundAndVibrate();
+                Intent intent_final = new Intent(getApplicationContext(),vbucksConfirmationPage.class);
+                intent_final.putExtra("pay_method","cash");
+                intent_final.putExtra("customer_id",result.getText());
+                intent_final.putExtra("role_id",String.valueOf(KEY_STAFF_ROLE_ID_VALUE));
+                startActivity(intent_final);
+                beepManager.playBeepSoundAndVibrate();
+            }
+            else {
+                getProduct(result.getText());
 
+                beepManager.playBeepSoundAndVibrate();
+            }
             //Added preview of scanned barcode
             ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
             imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
@@ -74,7 +91,9 @@ final Activity activity = this;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qr_scanner_activity);
-
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+        role_id = sharedPreferences.getInt(KEY_ROLE_ID,0);
+        Toast.makeText(getApplicationContext(), role_id+  " ", Toast.LENGTH_SHORT).show();
 
         barcodeView = (DecoratedBarcodeView) findViewById(R.id.barcode_scanner);
         Collection<BarcodeFormat> formats = Arrays.asList(BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39);

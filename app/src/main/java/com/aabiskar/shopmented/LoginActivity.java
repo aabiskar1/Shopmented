@@ -39,9 +39,12 @@ import retrofit2.Response;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_PHONE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -156,6 +159,8 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(KEY_NAME,user.getName());
                             editor.putString(KEY_EMAIL,user.getEmail());
                             editor.putString(KEY_PHONE,user.getPhone());
+                            editor.putInt(KEY_STATUS_ID,user.getStatus_id());
+                            editor.putInt(KEY_ROLE_ID,user.getRole_id());
                             editor.apply();
                         //    Toast.makeText(LoginActivity.this, "Login success:"+ user.getName(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplication(),HomeActivity.class);

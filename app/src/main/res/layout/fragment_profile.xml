@@ -61,7 +61,7 @@
                     <ImageView
                         android:id="@+id/profile_qr_imgview"
                         android:layout_width="100dp"
-                        android:layout_height="80dp"
+                        android:layout_height="100dp"
                         android:layout_alignParentRight="true" />
 
                     <ImageView

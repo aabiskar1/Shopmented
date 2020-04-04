@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".OrderCompletePage">
 
+    <com.airbnb.lottie.LottieAnimationView
+
+        android:id="@+id/done_animation_view"
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="works_done.json"
+        app:lottie_loop="false"
+        app:lottie_speed="0.4" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,20 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Total Paid:" />
-
-    <com.airbnb.lottie.LottieAnimationView
-
-        android:id="@+id/done_animation_view"
-
-
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="400dp"
-        app:lottie_loop="false"
-        app:lottie_autoPlay="true"
-        app:lottie_speed="0.4"
-            app:lottie_fileName="works_done.json"
- />
 
     <Button
         android:id="@+id/order_complete_done_btn"
