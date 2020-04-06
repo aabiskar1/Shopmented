@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.aabiskar.shopmented.adapters.BannerAdapter;
 import com.aabiskar.shopmented.adapters.ProductListAdapter;
+import com.aabiskar.shopmented.models.Banners;
 import com.aabiskar.shopmented.models.Products;
 import com.luseen.spacenavigation.SpaceNavigationView;
 
@@ -29,7 +31,8 @@ import retrofit2.Response;
 public class ProductListFragment extends Fragment {
     private ApiInterface apiInterface;
     private ProductListAdapter adapter;
-
+    RecyclerView  bannerRV;
+    private BannerAdapter bannerAdapter;
     RecyclerView recyclerViewProductsList;
 
     public ProductListFragment() {
@@ -46,12 +49,19 @@ public class ProductListFragment extends Fragment {
 
 
         recyclerViewProductsList = v.findViewById(R.id.product_list_recyclerView);
+        bannerRV = v.findViewById(R.id.productList_banner);
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewProductsList.setLayoutManager(linearLayoutManager);
         getData();
 
+
+
+
+        LinearLayoutManager linearLayoutManagerHorz = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        bannerRV.setLayoutManager(linearLayoutManagerHorz);
+        getDataBanner();
 
 
         return v;
@@ -112,6 +122,33 @@ public class ProductListFragment extends Fragment {
         });
 
     }
+
+
+
+
+    private void getDataBanner() {
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<ArrayList<Banners>> call = apiInterface.getHomeBanners();
+                call.enqueue(new Callback<ArrayList<Banners>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Banners>> call, Response<ArrayList<Banners>> response) {
+                        Toast.makeText(getActivity().getApplicationContext(), response.message().toString(), Toast.LENGTH_SHORT).show();
+                        generateDataListBanner(response.body());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Banners>> call, Throwable t) {
+                        Toast.makeText(getActivity().getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+        });
+    }
+    private void generateDataListBanner(ArrayList<Banners> bannersList) {
+
+        bannerAdapter = new BannerAdapter(getActivity().getApplicationContext(),bannersList);
+        bannerRV.setAdapter(bannerAdapter);
+    }
+
 
 
 }

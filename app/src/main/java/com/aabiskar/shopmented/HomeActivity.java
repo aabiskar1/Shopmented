@@ -14,22 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.aabiskar.shopmented.adapters.CartListAdapter;
 import com.aabiskar.shopmented.staff.LoadVBucks;
-import com.crashlytics.android.Crashlytics;
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.aabiskar.shopmented.staff.UserTypeList;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.ramotion.foldingcell.FoldingCell;
-
-import java.util.UUID;
-
-import butterknife.BindView;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 
 import static com.aabiskar.shopmented.R.color.colorPrimary;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
@@ -249,6 +241,12 @@ public class HomeActivity extends AppCompatActivity {
     public void openLoadBucksActivity(View v){
         Intent vBucksintent = new Intent(this, LoadVBucks.class);
         startActivity(vBucksintent);
+    }
+
+
+    public void openUserType(View v){
+        Intent userType = new Intent(this, UserTypeList.class);
+        startActivity(userType);
     }
 
 

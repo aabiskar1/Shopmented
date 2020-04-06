@@ -8,6 +8,8 @@ import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.Category;
 import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.Products;
+import com.aabiskar.shopmented.models.Roles;
+import com.aabiskar.shopmented.models.User;
 import com.aabiskar.shopmented.models.Users;
 import com.aabiskar.shopmented.models.VBucks;
 
@@ -135,6 +137,25 @@ public interface ApiInterface {
             @Field("transaction_date") String transaction_date,
             @Field("transaction_status") String transaction_status
     );
+
+    @GET("UserControls/getUserTypes.php")
+    Call<ArrayList<Roles>> getAllRoles();
+
+    @FormUrlEncoded
+    @POST("UserControls/getAllUser.php")
+    Call<ArrayList<User>>getUserList(
+            @Field("role_id") String role_id
+    );
+    @FormUrlEncoded
+    @POST("UserControls/updateUserStatus.php")
+    Call<CartInsert>updateUserStatus(
+            @Field("user_id") String user_id,
+            @Field("status") String status
+
+    );
+
+
+
 
 
 

@@ -38,6 +38,7 @@ public class ShopFragment extends Fragment {
     private TextView homeUserName;
     private RelativeLayout sofaCategoryLayout;
 
+
     public ShopFragment() {
         // Required empty public constructor
     }

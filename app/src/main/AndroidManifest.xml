@@ -17,9 +17,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".vbucksConfirmationPage">
-
-        </activity>
+        <activity android:name=".staff.UserTypeList"></activity>
+        <activity android:name=".staff.UserControl" />
+        <activity android:name=".vbucksConfirmationPage" />
         <activity android:name=".staff.StaffCartPage" />
         <activity android:name=".OrderCompletePage" />
         <activity android:name=".PaymentOption" />
