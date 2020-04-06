@@ -13,15 +13,18 @@ import com.aabiskar.shopmented.adapters.ProductListAdapter;
 import com.aabiskar.shopmented.models.Products;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
+
 public class category_productList extends AppCompatActivity {
     public ApiInterface apiInterface;
     private ProductListAdapter adapter;
-
+    private String category_id;
     RecyclerView recyclerViewCategoryProductsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,18 @@ public class category_productList extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewCategoryProductsList.setLayoutManager(linearLayoutManager);
-        getData("1");
+
+        Bundle extras = getIntent().getExtras();
+
+
+        if (extras != null) {
+            category_id = extras.getString("category_id");
+            // and get whatever type user account id is
+        }
+
+
+
+        getData(category_id);
 
     }
 
