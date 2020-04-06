@@ -4,23 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".vbucksConfirmationPage">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/confirm_page_rv"
+        android:id="@+id/test_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/confirm_pay_calc">
+        android:layout_height="match_parent" />
 
-    </androidx.recyclerview.widget.RecyclerView>
 
     <RelativeLayout
         android:id="@+id/confirm_pay_calc"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_above="@id/authorize_pay_btn"
-        android:layout_alignParentBottom="true">
+        android:layout_above="@id/authorize_pay_btn">
 
         <TextView
             android:id="@+id/confirm_low_balance_text"
@@ -84,4 +80,5 @@
         android:layout_alignParentBottom="true"
         android:text="PAY"
         android:visibility="gone" />
+
 </RelativeLayout>

@@ -39,7 +39,7 @@ public class Cart {
     public void setProductId(String productId) {
         this.productId = productId;
     }
- public String getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 

@@ -5,6 +5,7 @@ import com.aabiskar.shopmented.models.Banners;
 import com.aabiskar.shopmented.models.Cart;
 import com.aabiskar.shopmented.models.CartAmount;
 import com.aabiskar.shopmented.models.CartInsert;
+import com.aabiskar.shopmented.models.Category;
 import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
@@ -29,6 +30,10 @@ public interface ApiInterface {
       @Field("password") String password,
       @Field("phone") String phone
     );
+
+
+    @GET("category/categoryList.php")
+    Call<ArrayList<Category>> getAllCategory();
 
     @GET("products.php")
     Call<ArrayList<Products>> getAllProducts();

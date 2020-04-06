@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
@@ -42,7 +41,7 @@ public class PaymentOption extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(),vbucksConfirmationPage.class);
+                Intent intent = new Intent(getApplicationContext(), vbucksConfirmationPage.class);
                 intent.putExtra("pay_method","vbucks");
                 intent.putExtra("customer_id",customer_id+ "");
                 intent.putExtra("role_id",role_id+ "");
