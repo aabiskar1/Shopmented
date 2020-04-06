@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,24 +18,29 @@ import com.aabiskar.shopmented.ApiInterface;
 import com.aabiskar.shopmented.R;
 import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.User;
+import com.aabiskar.shopmented.models.Users;
 import com.nightonke.jellytogglebutton.JellyToggleButton;
 import com.nightonke.jellytogglebutton.State;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewHolder> {
+public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewHolder> implements Filterable {
     ApiInterface apiInterface;
     private Context context;
     private ArrayList<User> users;
+    private ArrayList<User> usersAll;
     private OnProductClickListener mListener;
 
     public UACAdapter(Context context, ArrayList<User> users) {
         this.context = context;
         this.users = users;
+        this.usersAll = new ArrayList<>(users);
     }
 
     @NonNull
@@ -67,6 +74,41 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
             return 0;
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter =new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<User> filteredList= new ArrayList<>();
+            if(constraint.toString().isEmpty()){
+              filteredList.addAll(usersAll);
+            }
+            else{
+                for(User user : usersAll){
+                    if(user.getName().toLowerCase().contains(constraint.toString().toLowerCase())){
+                        filteredList.add(user);
+                    }
+                }
+            }
+            FilterResults results =   new FilterResults();
+            results.values=filteredList;
+            return  results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+                users.clear();
+                users.addAll((Collection<? extends User>) results.values);
+                notifyDataSetChanged();
+        }
+    };
+
+
+
 
     public class ProductListViewHolder extends RecyclerView.ViewHolder {
 

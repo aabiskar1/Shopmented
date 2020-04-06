@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -44,7 +46,7 @@ public class UserControl extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        getWindow().setStatusBarColor(Color.WHITE);
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         setContentView(R.layout.activity_user_control);
         UACRecyclerView = findViewById(R.id.UAC_recycler_view);
@@ -63,23 +65,30 @@ public class UserControl extends AppCompatActivity {
         }
 
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchmenu,menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
 
+
+        return super.onCreateOptionsMenu(menu);
     }
-
-
-
 
     public void getData(String role_id){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
