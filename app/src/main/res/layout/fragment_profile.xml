@@ -10,12 +10,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/veryLightGrey">
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/veryLightGrey"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -23,7 +23,7 @@
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="10dp">
+                app:cardElevation="8dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -75,11 +75,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/profile_history_card"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/whiteCardColor"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -104,12 +106,14 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/whiteCardColor"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -131,12 +135,15 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>          <androidx.cardview.widget.CardView
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/whiteCardColor"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -158,12 +165,15 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>          <androidx.cardview.widget.CardView
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 app:cardBackgroundColor="@color/whiteCardColor"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="10dp"
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"

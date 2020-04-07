@@ -17,14 +17,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".staff.UserTypeList"></activity>
+        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".HistoryTransactionIdList" />
+        <activity android:name=".staff.UserTypeList" />
         <activity android:name=".staff.UserControl" />
         <activity android:name=".vbucksConfirmationPage" />
         <activity android:name=".staff.StaffCartPage" />
         <activity android:name=".OrderCompletePage" />
         <activity android:name=".PaymentOption" />
         <activity android:name=".staff.LoadVBucks" />
-        <activity android:name=".UserQROnly" />
+        <activity android:name=".UserQROnly"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +42,7 @@
         <activity android:name=".SimpleScannerActivity" />
         <activity
             android:name=".HomeActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".products_card" />
         <activity android:name=".ItemPage" />

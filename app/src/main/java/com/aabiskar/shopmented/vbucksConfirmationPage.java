@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +20,7 @@ import com.aabiskar.shopmented.models.CartAmount;
 import com.aabiskar.shopmented.adapters.ConfirmListAdapter;
 import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.VBucks;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,6 +38,9 @@ public class vbucksConfirmationPage extends AppCompatActivity {
     ArrayList<Cart> cartModel = new ArrayList<>();
     private ConfirmListAdapter testadapter;
 
+    private EditText phone_et;
+    private EditText address_et;
+
 
     private TextView vbucks_tv;
     private TextView pay_amount_tv;
@@ -43,6 +51,8 @@ public class vbucksConfirmationPage extends AppCompatActivity {
     private String payment_mode;
     private int customer_id;
     private int role_id;
+    private String address_value;
+    private TextInputLayout phoneTextInput;
 
 
     @Override
@@ -57,13 +67,39 @@ public class vbucksConfirmationPage extends AppCompatActivity {
         authorizePaymentBtn = findViewById(R.id.authorize_pay_btn);
         low_balance_text =findViewById(R.id.confirm_low_balance_text);
 
+        phone_et = findViewById(R.id.phone_editText);
+        address_et = findViewById(R.id.delivery_editText);
+        phoneTextInput = findViewById(R.id.textInputPhone);
 
         testRV = findViewById(R.id.test_rv);
 
         testRV.setLayoutManager(new LinearLayoutManager(this));
 
-        getResponse();
 
+
+
+
+        phone_et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(phone_et.getText().length()==10){
+                    phoneTextInput.setBoxStrokeColor(getResources().getColor(R.color.green,getTheme()));
+                }
+                else{
+                    phoneTextInput.setBoxStrokeColor(getResources().getColor(R.color.logoutRed,getTheme()));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         Bundle extras = getIntent().getExtras();
 
@@ -76,7 +112,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
             // and get whatever type user account id is
         }
 
-
+        getResponse();
 
         if(role_id==KEY_CUSTOMER_ROLE_ID_VALUE){
             getUserVBucks();
@@ -91,7 +127,12 @@ public class vbucksConfirmationPage extends AppCompatActivity {
         authorizePaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createOrder();
+                if(phone_et.getText().length()<10){
+                    phone_et.requestFocus();
+                    phone_et.setError("Invalid Phone Number");
+                }
+                else{
+                createOrder();}
             }
         });
 
@@ -103,7 +144,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
     private void getResponse(){
         ApiInterface apiInterface;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        apiInterface.getCartList(1).enqueue(new Callback<ArrayList<Cart>>() {
+        apiInterface.getCartList(customer_id).enqueue(new Callback<ArrayList<Cart>>() {
             @Override
             public void onResponse(Call<ArrayList<Cart>> call, Response<ArrayList<Cart>> response) {
                     cartModel = new ArrayList<>(response.body());
@@ -113,7 +154,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Cart>> call, Throwable t) {
-
+                Toast.makeText(vbucksConfirmationPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -201,52 +242,58 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private void createOrder(){
 
-        UUID uuid_transaction = UUID.randomUUID();
-        UUID uuid_order = UUID.randomUUID();
 
-        java.util.Date dt = new java.util.Date();
+            if(TextUtils.isEmpty(address_et.getText().toString())){
+                address_value = "store";
+            }
+            else{
+                address_value= address_et.getText().toString();
+            }
+            UUID uuid_transaction = UUID.randomUUID();
+//            UUID uuid_order = UUID.randomUUID();
 
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date dt = new java.util.Date();
 
-        String currentTime = sdf.format(dt);
+            java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String currentTime = sdf.format(dt);
 
 
-        ApiInterface apiInterface;
-        apiInterface =  ApiClient.getApiClient().create(ApiInterface.class);
+            ApiInterface apiInterface;
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        apiInterface.createOrder(customer_id,role_id,Double.parseDouble(String.valueOf(pay_amt)),
-                "ktm","4",uuid_order.toString(),uuid_transaction.toString(),payment_mode,currentTime,"4")
-                .enqueue(new Callback<OrderResponse>() {
-                    @Override
-                    public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
-                        if(response.isSuccessful()){
-                            if(response.body().getSuccess().equals("1")){
-                                Toast.makeText(vbucksConfirmationPage.this, "Order Completed", Toast.LENGTH_SHORT).show();
-                                Intent intent_home = new Intent(getApplicationContext(),OrderCompletePage.class);
-                                intent_home.putExtra("transaction_id",uuid_transaction.toString());
-                                intent_home.putExtra("order_id",uuid_order.toString());
-                                intent_home.putExtra("dateTime",currentTime);
-                                intent_home.putExtra("transaction_mode",payment_mode);
-                                intent_home.putExtra("totalPaid",String.valueOf(pay_amt));
-                                startActivity(intent_home);
-                            }
-                            else{
-                                Toast.makeText(vbucksConfirmationPage.this, "Some error occur. Please contact support.", Toast.LENGTH_SHORT).show();
+            apiInterface.createOrder(customer_id, role_id, Double.parseDouble(String.valueOf(pay_amt)),
+                    address_value, phone_et.getText().toString(),"4", uuid_transaction.toString(), payment_mode, currentTime, "4")
+                    .enqueue(new Callback<OrderResponse>() {
+                        @Override
+                        public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+                            if (response.isSuccessful()) {
+                                if (response.body().getSuccess().equals("1")) {
+                                    Toast.makeText(vbucksConfirmationPage.this, "Order Completed", Toast.LENGTH_SHORT).show();
+                                    Intent intent_home = new Intent(getApplicationContext(), OrderCompletePage.class);
+                                    intent_home.putExtra("transaction_id", uuid_transaction.toString());
+
+                                    intent_home.putExtra("dateTime", currentTime);
+                                    intent_home.putExtra("transaction_mode", payment_mode);
+                                    intent_home.putExtra("totalPaid", String.valueOf(pay_amt));
+                                    startActivity(intent_home);
+                                } else {
+                                    Toast.makeText(vbucksConfirmationPage.this, "Some error occur. Please contact support.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(vbucksConfirmationPage.this, "Some error occur. Please contact support1.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else{
-                            Toast.makeText(vbucksConfirmationPage.this, "Some error occur. Please contact support1.", Toast.LENGTH_SHORT).show();
+
+                        @Override
+                        public void onFailure(Call<OrderResponse> call, Throwable t) {
+                            Toast.makeText(vbucksConfirmationPage.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    });
+        }
 
-                    @Override
-                    public void onFailure(Call<OrderResponse> call, Throwable t) {
-                        Toast.makeText(vbucksConfirmationPage.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
-    }
 
 
 

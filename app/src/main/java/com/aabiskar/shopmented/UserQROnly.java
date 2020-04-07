@@ -2,9 +2,12 @@ package com.aabiskar.shopmented;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -23,6 +26,9 @@ public class UserQROnly extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_qr_only);
+        getSupportActionBar().hide();
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         qr_img=findViewById(R.id.user_qr_only_iv);
         loadSharedPrefData();
@@ -49,5 +55,17 @@ public class UserQROnly extends AppCompatActivity {
             genQR(user_id+"",qr_img);
             //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
         }
+    }
+    public void closeActivity(View v){
+        finish();
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
     }
 }

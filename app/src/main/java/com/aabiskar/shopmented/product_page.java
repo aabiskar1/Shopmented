@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -29,6 +35,9 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 public class product_page extends AppCompatActivity {
 
     String product_id;
+
+    @BindView(R.id.buy_btn)
+    CircularProgressButton buyBtn;
 
     @BindView(R.id.product_page_img)
     ImageView product_img;
@@ -51,6 +60,9 @@ public class product_page extends AppCompatActivity {
     @BindView(R.id.item_page_qty_minus)
     ImageView item_qty_minus_btn;
 
+    @BindView(R.id.item_page_page_close_btn)
+    ImageView item_page_close_btn;
+
 
     private TextView item_qty_tv;
 
@@ -62,7 +74,7 @@ public class product_page extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         getSupportActionBar().setElevation(0);
         ButterKnife.bind(this);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary,getTheme()));
+
 
         item_qty_tv = findViewById(R.id.item_page_qty_tv);
 
@@ -77,6 +89,11 @@ public class product_page extends AppCompatActivity {
             product_name.setText(name);
             product_model.setText(model);
             product_desc.setText(description);
+
+
+            getWindow().setStatusBarColor(Color.WHITE);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getSupportActionBar().hide();
 
             Picasso.get().load(img_url).fit().into(product_img);
 //            Toast.makeText(this, model + "mode is", Toast.LENGTH_SHORT).show();
@@ -94,6 +111,26 @@ public class product_page extends AppCompatActivity {
             });
 
         }
+        item_page_close_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buyBtn.startAnimation();
+                addToCart(v);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    buyBtn.revertAnimation();
+                    }
+                }, 2000);
+            }
+        });
     }
     public void addToCart(View v){
         SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
@@ -105,7 +142,8 @@ public class product_page extends AppCompatActivity {
         } catch(NumberFormatException nfe) {
             System.out.println("Could not parse " + nfe);
         }
-
+        Bitmap icon = BitmapFactory.decodeResource(getApplicationContext().getResources(),
+                R.drawable.ic_check_white_24dp);
         apiInterface.insertCart(int_productID,customer_id,Integer.parseInt(item_qty_tv.getText().toString())).enqueue(new Callback<CartInsert>() {
             @Override
             public void onResponse(Call<CartInsert> call, Response<CartInsert> response) {
@@ -113,6 +151,7 @@ public class product_page extends AppCompatActivity {
                     if(response.body().getSuccess().equals("1")){
 
                         Toast.makeText(product_page.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+
 
                     }else{
 

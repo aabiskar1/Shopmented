@@ -3,6 +3,7 @@ package com.aabiskar.shopmented;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,14 +14,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aabiskar.shopmented.adapters.BannerAdapter;
 import com.aabiskar.shopmented.models.Banners;
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +40,8 @@ public class ShopFragment extends Fragment {
     private BannerAdapter adapter;
     RecyclerView recyclerViewBanners;
     private TextView homeUserName;
-    private RelativeLayout sofaCategoryLayout;
+    private LinearLayout sofaCategoryLayout;
+    private LottieAnimationView lottieAnimationView;
 
 
     public ShopFragment() {
@@ -52,6 +57,27 @@ public class ShopFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);
+        lottieAnimationView = v.findViewById(R.id.greeting_animation_view);
+
+
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if(timeOfDay >= 0 && timeOfDay < 6){
+//            Toast.makeText(getActivity(), "Good Morning", Toast.LENGTH_SHORT).show();
+            lottieAnimationView.setAnimation("night.json");
+        }else if(timeOfDay >= 6 && timeOfDay < 16){
+//            Toast.makeText(getActivity(), "Good MORNING", Toast.LENGTH_SHORT).show();
+            lottieAnimationView.setAnimation("morning.json");
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+//            Toast.makeText(getActivity(), "Good Evening", Toast.LENGTH_SHORT).show();
+            lottieAnimationView.setAnimation("weather-cloudy.json");
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+//            Toast.makeText(getActivity(), "Good Night", Toast.LENGTH_SHORT).show();
+            lottieAnimationView.setAnimation("night.json");
+//            lottieAnimationView.setAnimation("weather-cloudy.json");
+        }
+
 
 
 
@@ -112,6 +138,7 @@ public class ShopFragment extends Fragment {
             //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
         }
     }
+
 }
 
 

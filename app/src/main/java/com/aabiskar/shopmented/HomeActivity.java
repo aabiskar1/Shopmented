@@ -2,6 +2,7 @@ package com.aabiskar.shopmented;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -28,6 +29,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_PHONE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class HomeActivity extends AppCompatActivity {
@@ -46,13 +48,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         getSupportActionBar().hide();
-
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Intent intent = new Intent(this,UserQROnly.class);
-            startActivity(intent);
-
-        }
 
 
 
@@ -87,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
 // Commit the transaction
                         shoptransaction.commit();
-                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(colorPrimary,getTheme()));
+//                        spaceNavigationView.changeSpaceBackgroundColor(getResources().getColor(colorPrimary,getTheme()));
                         break;
 
                     case 1:
@@ -247,6 +245,32 @@ public class HomeActivity extends AppCompatActivity {
     public void openUserType(View v){
         Intent userType = new Intent(this, UserTypeList.class);
         startActivity(userType);
+    }
+
+    public void openHistory(View v){
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS, MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt(KEY_USER_ID, 0);
+
+        Intent history_intent = new Intent(this, HistoryTransactionIdList.class);
+
+        history_intent.putExtra("customer_id",String.valueOf(user_id));
+        startActivity(history_intent);
+    }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation== Configuration.ORIENTATION_PORTRAIT)
+        {
+
+        }
+        else  if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Intent intent = new Intent(this,UserQROnly.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+
+            }
+        }
     }
 
 

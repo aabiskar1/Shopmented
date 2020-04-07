@@ -26,12 +26,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
-                android:elevation="8dp"
-                app:active_item_color="@color/colorAccent"
+                android:elevation="50dp"
+                app:active_item_color="@color/colorPrimary"
                 app:centre_button_color="@color/profileAccentColor"
                 app:centre_button_icon="@drawable/ic_qr_code_scan"
-                app:inactive_item_color="@color/white"
-                app:space_background_color="@color/colorPrimary"
+                app:inactive_item_color="@color/darkgrey"
+                app:space_background_color="#F8F4F4"
                 app:space_item_icon_only_size="@dimen/space_item_icon_only_size"
                 app:space_item_icon_size="@dimen/space_item_icon_default_size"
                 app:space_item_text_size="@dimen/space_item_text_default_size" />
@@ -111,6 +111,23 @@
                     android:layout_height="wrap_content"
                     android:text="User Access Control"
                     android:onClick="openUserType"
+                    android:textSize="15sp"/>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/side_nav_card4"
+                android:layout_below="@id/side_nav_card3"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/history_tab"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="History"
+                    android:onClick="openHistory"
                     android:textSize="15sp"/>
 
             </androidx.cardview.widget.CardView>

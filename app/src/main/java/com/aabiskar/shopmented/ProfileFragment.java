@@ -3,9 +3,11 @@ package com.aabiskar.shopmented;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -37,6 +39,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
  */
 public class ProfileFragment extends Fragment {
     ImageView qrImgView;
+    private CardView history_card_view;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -48,8 +51,25 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
 
 //        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.yellow,getActivity().getTheme()));
+
+        getActivity().getWindow().setStatusBarColor(Color.WHITE);
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         View v = inflater.inflate(R.layout.fragment_profile, container, false);;
         qrImgView = v.findViewById(R.id.profile_qr_imgview);
+        history_card_view = v.findViewById(R.id.profile_history_card);
+        history_card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS, MODE_PRIVATE);
+                int user_id = sharedPreferences.getInt(KEY_USER_ID, 0);
+
+                Intent history_intent = new Intent(getActivity(), HistoryTransactionIdList.class);
+
+                history_intent.putExtra("customer_id",String.valueOf(user_id));
+                startActivity(history_intent);
+            }
+        });
 
         loadSharedPrefData();
 

@@ -1,6 +1,7 @@
 package com.aabiskar.shopmented.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class ConfirmListAdapter extends RecyclerView.Adapter<ConfirmListAdapter.
     @NonNull
     @Override
     public ConfirmListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_confirm_item_card,parent,false);
         return new ConfirmListAdapter.ViewHolder(view);
     }
@@ -45,7 +45,16 @@ public class ConfirmListAdapter extends RecyclerView.Adapter<ConfirmListAdapter.
 
     @Override
     public int getItemCount() {
-        return  cartModel.size();
+
+        if (cartModel.size()!=0) {
+            Log.d("listsize", "listsize not small confirm list adapter");
+            return cartModel.size();
+        }
+        else{
+            Log.d("listsize", "listsize smaller than 0 confirm list adapter");
+            return 0;
+        }
+
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder{
@@ -59,11 +68,6 @@ public class ConfirmListAdapter extends RecyclerView.Adapter<ConfirmListAdapter.
             product_price = itemView.findViewById(R.id.confirm_item_card_product_price_tv);
 
 
-
-
-
-
-            ;
         }
     }
 }

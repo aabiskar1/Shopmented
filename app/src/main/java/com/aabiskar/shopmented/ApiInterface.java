@@ -6,6 +6,7 @@ import com.aabiskar.shopmented.models.Cart;
 import com.aabiskar.shopmented.models.CartAmount;
 import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.Category;
+import com.aabiskar.shopmented.models.History;
 import com.aabiskar.shopmented.models.OrderResponse;
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Roles;
@@ -130,8 +131,9 @@ public interface ApiInterface {
             @Field("role_id") int role_id,
             @Field("transaction_total_amt") Double transaction_total_amt,
             @Field("shipping_address") String shipping_address,
+            @Field("phone") String phone,
             @Field("status_id") String status_id,
-            @Field("order_id") String order_id,
+
             @Field("transaction_id") String transaction_id,
             @Field("transaction_mode") String transaction_mode,
             @Field("transaction_date") String transaction_date,
@@ -152,6 +154,18 @@ public interface ApiInterface {
             @Field("user_id") String user_id,
             @Field("status") String status
 
+    );
+
+
+    @FormUrlEncoded
+    @POST("history/getTransactionId.php")
+    Call<ArrayList<History>> getTransactionList(
+            @Field("customer_id") int customer_id
+    );
+    @FormUrlEncoded
+    @POST("history/getHistory.php")
+    Call<ArrayList<History>> getHistory(
+            @Field("transaction_id") String transaction_id
     );
 
 

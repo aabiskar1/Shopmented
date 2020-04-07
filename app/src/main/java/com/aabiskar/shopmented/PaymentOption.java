@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,7 +21,9 @@ public class PaymentOption extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_option);
 
-
+        getSupportActionBar().hide();
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
 
 
@@ -48,5 +51,9 @@ public class PaymentOption extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void closeActivity(View v){
+        finish();
     }
 }

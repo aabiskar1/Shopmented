@@ -44,7 +44,7 @@ public class OrderCompletePage extends AppCompatActivity {
             transaction_id.setText("Transaction ID: "+extras.getString("transaction_id"));
             dateTime.setText("Date Time: "+extras.getString("dateTime"));
             total_paid.setText("Total Paid: "+extras.getString("totalPaid"));
-            order_id.setText("Order ID: "+extras.getString("order_id"));
+//            order_id.setText("Order ID: "+extras.getString("order_id"));
             // and get whatever type user account id is
         }
 
