@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 
 import com.aabiskar.shopmented.staff.LoadVBucks;
-import com.aabiskar.shopmented.staff.StaffQROptions;
 import com.aabiskar.shopmented.staff.UserTypeList;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
@@ -261,7 +260,7 @@ public class HomeActivity extends AppCompatActivity {
     public void openMap(View v){
 
 
-        Intent history_intent = new Intent(this, StaffQROptions.class);
+        Intent history_intent = new Intent(this, mapView.class);
 
         startActivity(history_intent);
     }
