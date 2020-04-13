@@ -7,6 +7,7 @@ buildscript {
         maven {
             url 'https://maven.fabric.io/public'
         }
+        mavenCentral()
 
 
     }
@@ -24,7 +25,19 @@ allprojects {
         google()
         jcenter()
         maven {url 'https://jitpack.io'}
-        
+        maven { url 'https://mapbox.bintray.com/mapbox' }
+        maven {
+            url 'https://api.mapbox.com/downloads/v1/vision/android/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username ='mapbox'
+                password ='sk.eyJ1IjoiYWFiaXNrYXIxIiwiYSI6ImNrOHlnNjR1NzAxdGkzbW81eHR1MDRiZXAifQ.BbCMGIr6WZLy1R7g1cWQzA'
+            }
+        }
+
+
     }
 }
 

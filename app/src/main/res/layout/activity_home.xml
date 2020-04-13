@@ -131,6 +131,25 @@
                     android:textSize="15sp"/>
 
             </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/side_nav_card5"
+                android:layout_below="@id/side_nav_card3"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/nav_map"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Store Location"
+                    android:onClick="openMap"
+                    android:textSize="15sp"/>
+
+            </androidx.cardview.widget.CardView>
             <com.ramotion.foldingcell.FoldingCell
                 android:layout_alignParentBottom="true"
                 android:id="@+id/folding_cell"

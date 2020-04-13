@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.aabiskar.shopmented.staff.LoadVBucks;
+import com.aabiskar.shopmented.staff.StaffQROptions;
 import com.aabiskar.shopmented.staff.UserTypeList;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
@@ -254,6 +255,14 @@ public class HomeActivity extends AppCompatActivity {
         Intent history_intent = new Intent(this, HistoryTransactionIdList.class);
 
         history_intent.putExtra("customer_id",String.valueOf(user_id));
+        startActivity(history_intent);
+    }
+
+    public void openMap(View v){
+
+
+        Intent history_intent = new Intent(this, StaffQROptions.class);
+
         startActivity(history_intent);
     }
     public void onConfigurationChanged(Configuration newConfig) {

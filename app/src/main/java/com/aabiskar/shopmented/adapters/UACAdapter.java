@@ -132,7 +132,7 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
                             listener.onProductClick(position);
                             if (controlToggle.isChecked()) {
                                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                                apiInterface.updateUserStatus(userId.getText().toString(), "enable").enqueue(new Callback<CartInsert>() {
+                                apiInterface.updateUserStatus(userId.getText().toString(), "1").enqueue(new Callback<CartInsert>() {
                                     @Override
                                     public void onResponse(Call<CartInsert> call, Response<CartInsert> response) {
                                         if (response.isSuccessful()) {

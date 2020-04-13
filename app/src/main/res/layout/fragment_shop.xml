@@ -175,7 +175,7 @@
 
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/shopFragmentVBucks"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -209,25 +209,24 @@
                         android:weightSum="3">
 
                         <com.airbnb.lottie.LottieAnimationView
-
                             android:id="@+id/coin_animation_view2"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_gravity="center"
-                            android:layout_weight="2"
+                            android:layout_weight="3"
                             app:lottie_autoPlay="true"
-                            app:lottie_fileName="coin.json"
+                            android:src="@drawable/ic_ar"
                             app:lottie_loop="true" />
 
 
-                        <TextView
-                            android:id="@+id/textView42"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Rs.0"
-                            android:textSize="18sp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/textView42"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="Rs.0"-->
+<!--                            android:textSize="18sp" />-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

@@ -21,7 +21,9 @@ import android.widget.Toast;
 
 import com.aabiskar.shopmented.adapters.BannerAdapter;
 import com.aabiskar.shopmented.models.Banners;
+import com.aabiskar.shopmented.models.VBucks;
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,6 +35,7 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
 public class ShopFragment extends Fragment {
@@ -42,6 +45,7 @@ public class ShopFragment extends Fragment {
     private TextView homeUserName;
     private LinearLayout sofaCategoryLayout;
     private LottieAnimationView lottieAnimationView;
+    private TextView vBucksAmt;
 
 
     public ShopFragment() {
@@ -55,10 +59,14 @@ public class ShopFragment extends Fragment {
 
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary,getActivity().getTheme()));
 
+
+
+
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);
         lottieAnimationView = v.findViewById(R.id.greeting_animation_view);
 
+        vBucksAmt = v.findViewById(R.id.shopFragmentVBucks);
 
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
@@ -99,6 +107,7 @@ public class ShopFragment extends Fragment {
         homeUserName = v.findViewById(R.id.home_salutation);
         loadSharedPrefData();
         Log.d("thisisadapter","on create of shop");
+        getUserVBucks();
         return v;
 
     }
@@ -137,6 +146,32 @@ public class ShopFragment extends Fragment {
             homeUserName.setText("WELCOME,"+"\n"+name.toUpperCase());
             //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private  void getUserVBucks(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
+        ApiInterface apiInterfaceVBucks;
+
+        apiInterfaceVBucks =  ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterfaceVBucks.getUserVBucks(customer_id).enqueue(new Callback<ArrayList<VBucks>>() {
+            @Override
+            public void onResponse(Call<ArrayList<VBucks>> call, Response<ArrayList<VBucks>> response) {
+                if(response.body()!=null) {
+                    ArrayList<VBucks> totalVBucksArr = new ArrayList<>();
+                    totalVBucksArr = response.body();
+                    vBucksAmt.setText("Rs."+totalVBucksArr.get(0).getTotal() + " ");
+                }
+                else{
+                    vBucksAmt.setText("Connection Error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<VBucks>> call, Throwable t) {
+                Toast.makeText(getActivity().getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

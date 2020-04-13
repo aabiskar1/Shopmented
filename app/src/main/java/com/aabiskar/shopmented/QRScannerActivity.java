@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.models.Users;
+import com.aabiskar.shopmented.staff.StaffQROptions;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.BeepManager;
@@ -63,10 +64,8 @@ final Activity activity = this;
 
             if(role_id== KEY_STAFF_ROLE_ID_VALUE){
 
-                Intent intent_final = new Intent(getApplicationContext(),vbucksConfirmationPage.class);
-                intent_final.putExtra("pay_method","cash");
+                Intent intent_final = new Intent(getApplicationContext(), StaffQROptions.class);
                 intent_final.putExtra("customer_id",result.getText());
-                intent_final.putExtra("role_id",String.valueOf(KEY_STAFF_ROLE_ID_VALUE));
                 startActivity(intent_final);
                 beepManager.playBeepSoundAndVibrate();
             }
