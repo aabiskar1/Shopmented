@@ -1,6 +1,8 @@
 package com.aabiskar.shopmented;
 
 
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -15,6 +17,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -49,6 +53,7 @@ public class ShopFragment extends Fragment {
     private LottieAnimationView lottieAnimationView;
     private TextView vBucksAmt;
     private EditText searchEt;
+    private RelativeLayout mainLayout;
 
 
     public ShopFragment() {
@@ -66,6 +71,7 @@ public class ShopFragment extends Fragment {
 
 
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
+        mainLayout = v.findViewById(R.id.shop_main_layout);
         recyclerViewBanners = v.findViewById(R.id.home_banner_recyclerView);
         lottieAnimationView = v.findViewById(R.id.greeting_animation_view);
 
@@ -112,8 +118,6 @@ public class ShopFragment extends Fragment {
         Log.d("thisisadapter","on create of shop");
         getUserVBucks();
 
-
-
         searchEt = v.findViewById(R.id.home_search_editText);
 
         searchEt.setOnKeyListener(new View.OnKeyListener() {
@@ -128,7 +132,7 @@ public class ShopFragment extends Fragment {
                             (keyCode == KeyEvent.KEYCODE_ENTER)) {
                         Intent intent_search = new Intent(getActivity().getApplicationContext(),SearchActivity.class);
                         intent_search.putExtra("value",searchEt.getText().toString());
-                        startActivity(intent_search);
+                        startActivity(intent_search, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
 
                     }
                 }
@@ -145,6 +149,17 @@ public class ShopFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+
+
+        } else {
+
+        }
+    }
 
     private void getData() {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -207,6 +222,11 @@ public class ShopFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 }
 
 

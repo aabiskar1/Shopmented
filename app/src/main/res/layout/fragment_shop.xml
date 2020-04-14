@@ -4,6 +4,7 @@
     android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/shop_main_layout"
     android:layout_height="match_parent"
     tools:context=".ShopFragment">
 
@@ -14,6 +15,7 @@
         android:fillViewport="true">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
@@ -217,19 +219,19 @@
                             android:layout_height="0dp"
                             android:layout_gravity="center"
                             android:layout_weight="3"
-                            app:lottie_autoPlay="true"
                             android:src="@drawable/ic_ar"
+                            app:lottie_autoPlay="true"
                             app:lottie_loop="true" />
 
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/textView42"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="0dp"-->
-<!--                            android:layout_weight="1"-->
-<!--                            android:gravity="center"-->
-<!--                            android:text="Rs.0"-->
-<!--                            android:textSize="18sp" />-->
+                        <!--                        <TextView-->
+                        <!--                            android:id="@+id/textView42"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="0dp"-->
+                        <!--                            android:layout_weight="1"-->
+                        <!--                            android:gravity="center"-->
+                        <!--                            android:text="Rs.0"-->
+                        <!--                            android:textSize="18sp" />-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -164,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                             editor.apply();
                         //    Toast.makeText(LoginActivity.this, "Login success:"+ user.getName(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplication(),HomeActivity.class);
-                            startActivity(intent);
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
 
                         }
                     }

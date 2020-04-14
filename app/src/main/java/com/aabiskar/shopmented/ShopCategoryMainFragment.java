@@ -34,6 +34,8 @@ public class ShopCategoryMainFragment extends Fragment {
         myFragment = inflater.inflate(R.layout.fragment_shop_category_main, container, false);
 
         viewPager = myFragment.findViewById(R.id.viewPager);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
         tabLayout = myFragment.findViewById(R.id.tabLayout);
         return myFragment;
     }

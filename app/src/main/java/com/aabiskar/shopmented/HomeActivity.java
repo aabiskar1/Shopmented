@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -232,7 +233,7 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
+        startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 
@@ -244,7 +245,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openUserType(View v){
         Intent userType = new Intent(this, UserTypeList.class);
-        startActivity(userType);
+        startActivity(userType,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     public void openHistory(View v){
@@ -254,7 +255,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent history_intent = new Intent(this, HistoryTransactionIdList.class);
 
         history_intent.putExtra("customer_id",String.valueOf(user_id));
-        startActivity(history_intent);
+        startActivity(history_intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     public void openMap(View v){
@@ -262,7 +263,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent history_intent = new Intent(this, mapView.class);
 
-        startActivity(history_intent);
+        startActivity(history_intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);

@@ -4,6 +4,7 @@ package com.aabiskar.shopmented;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,8 @@ public class ProductListFragment extends Fragment {
     RecyclerView  bannerRV;
     private BannerAdapter bannerAdapter;
     RecyclerView recyclerViewProductsList;
+    private CoordinatorLayout mainLayout;
+
 
     public ProductListFragment() {
         // Required empty public constructor
@@ -57,16 +60,26 @@ public class ProductListFragment extends Fragment {
         getData();
 
 
-
+        mainLayout = v.findViewById(R.id.product_list_mainLayout);
 
         LinearLayoutManager linearLayoutManagerHorz = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         bannerRV.setLayoutManager(linearLayoutManagerHorz);
-        getDataBanner();
+
 
 
         return v;
     }
 
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+
+            getData();
+            getDataBanner();
+        } else {
+        }
+    }
 
     public void getData(){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);

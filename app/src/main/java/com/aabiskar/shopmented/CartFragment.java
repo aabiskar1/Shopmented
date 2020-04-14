@@ -46,13 +46,7 @@ public class CartFragment extends Fragment {
     public CartFragment() {
         // Required empty public constructor
     }
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            getFragmentManager().beginTransaction().detach(this).attach(this).commit();
-        }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,8 +60,7 @@ public class CartFragment extends Fragment {
         checkout_btn = v.findViewById(R.id.cart_checkout_btn);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewCartList.setLayoutManager(linearLayoutManager);
-        getData();
-        getTotalCartPrice();
+
 
 
 
@@ -85,7 +78,16 @@ public class CartFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            getData();
+            getTotalCartPrice();
+        } else {
 
+        }
+    }
 
 
     private void getData(){

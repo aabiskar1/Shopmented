@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
         Cart product = products.get(position);
         holder.prodcutName.setText(product.getProductName());
         holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));

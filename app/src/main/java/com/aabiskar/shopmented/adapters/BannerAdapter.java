@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerList
     @Override
     public void onBindViewHolder(@NonNull BannerListViewHolder holder, int position) {
         Banners banner= banners.get(position);
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
+
         Picasso.get().load(banner.getImgUrl()).fit().into(holder.img_view);
 
 

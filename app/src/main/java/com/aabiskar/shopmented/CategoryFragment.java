@@ -50,7 +50,7 @@ public class CategoryFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
-        getData();
+
 
 
 
@@ -60,6 +60,16 @@ public class CategoryFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            getData();
+
+        } else {
+
+        }
+    }
 
 
     public void getData(){

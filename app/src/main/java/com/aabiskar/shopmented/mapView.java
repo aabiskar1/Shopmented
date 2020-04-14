@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -40,6 +44,10 @@ public class mapView extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
+// set an exit transition
+        getWindow().setEnterTransition(new Explode());
 
 
         getSupportActionBar().hide();
@@ -186,4 +194,7 @@ public class mapView extends AppCompatActivity implements
                 .build();
         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 2000);
     }
+
+
+
 }

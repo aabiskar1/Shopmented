@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aabiskar.shopmented.R;
@@ -40,6 +42,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
+
+
+        holder.item_cardView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+
+
         Products product = products.get(position);
         holder.prodcutName.setText(product.getName());
         holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));
@@ -65,12 +72,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         TextView prodcutName,productPrice;
         ImageView img_view;
+        CardView item_cardView;
 
         public ProductListViewHolder(View itemView, OnProductClickListener listener){
             super(itemView);
             prodcutName = itemView.findViewById(R.id.product_card_product_name_tv);
             productPrice = itemView.findViewById(R.id.product_card_product_price_tv);
             img_view = itemView.findViewById(R.id.product_card_img_view);
+            item_cardView = itemView.findViewById(R.id.product_list_card_view);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
