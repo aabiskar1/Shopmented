@@ -63,7 +63,7 @@
                                 android:id="@+id/home_salutation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif"
+                                android:fontFamily="@font/viga"
                                 android:text="WELCOME, AABISKAR"
                                 android:textColor="@color/white"
                                 android:textSize="24sp" />
@@ -71,7 +71,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-condensed-medium"
+                                android:fontFamily="@font/viga"
                                 android:text="What do you wanna buy today?"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
@@ -101,11 +101,13 @@
                         android:src="@drawable/ic_search_grey_24dp" />
 
                     <EditText
+                        android:id="@+id/home_search_editText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_toRightOf="@id/home_search_icon"
                         android:background="@drawable/white_rounded_btn"
                         android:hint="SEARCH"
+                        android:inputType="text"
                         android:maxLines="1" />
                 </RelativeLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -179,6 +181,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
+                            android:fontFamily="@font/viga"
                             android:gravity="center"
                             android:text="Rs.0"
                             android:textSize="18sp" />

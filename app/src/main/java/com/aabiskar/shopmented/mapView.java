@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +39,16 @@ public class mapView extends AppCompatActivity implements
     private PermissionsManager permissionsManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+        getSupportActionBar().hide();
+
+        Window w = getWindow();
+        w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         super.onCreate(savedInstanceState);
+
 // Mapbox access token is configured here. This needs to be called either in your application
 // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.access_token));

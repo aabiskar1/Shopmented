@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,6 +48,7 @@ public class ShopFragment extends Fragment {
     private LinearLayout sofaCategoryLayout;
     private LottieAnimationView lottieAnimationView;
     private TextView vBucksAmt;
+    private EditText searchEt;
 
 
     public ShopFragment() {
@@ -108,6 +111,36 @@ public class ShopFragment extends Fragment {
         loadSharedPrefData();
         Log.d("thisisadapter","on create of shop");
         getUserVBucks();
+
+
+
+        searchEt = v.findViewById(R.id.home_search_editText);
+
+        searchEt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                String searchTerm = searchEt.getText().toString();
+                if (searchTerm.isEmpty()) {
+                    searchEt.requestFocus();
+
+                } else {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        Intent intent_search = new Intent(getActivity().getApplicationContext(),SearchActivity.class);
+                        intent_search.putExtra("value",searchEt.getText().toString());
+                        startActivity(intent_search);
+
+                    }
+                }
+
+
+                return false;
+            }
+        });
+
+
+
+
         return v;
 
     }

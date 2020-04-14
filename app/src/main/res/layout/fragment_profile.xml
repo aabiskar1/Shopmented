@@ -55,6 +55,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/viga"
                         android:text="AABISHKAR ARYAL"
                         android:textSize="24sp" />
 

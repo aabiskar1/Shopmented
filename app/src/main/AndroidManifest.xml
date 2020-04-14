@@ -22,7 +22,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".staff.StaffQROptions"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".staff.StaffQROptions" />
         <activity android:name=".mapView" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".HistoryTransactionIdList" />

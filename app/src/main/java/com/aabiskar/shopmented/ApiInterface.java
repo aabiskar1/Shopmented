@@ -168,6 +168,12 @@ public interface ApiInterface {
             @Field("transaction_id") String transaction_id
     );
 
+    @FormUrlEncoded
+    @POST("search/search.php")
+    Call<ArrayList<Products>> searchProducts(
+            @Field("value") String value
+    );
+
 
 
 
