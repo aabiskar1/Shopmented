@@ -138,6 +138,8 @@ final Activity activity = this;
     }
 
     public void getProduct(final String model){
+
+        // This method is used in router activity too
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ArrayList<Products>> call = apiInterface.getProduct(model);
 
@@ -151,6 +153,7 @@ final Activity activity = this;
                     String product_desc = String.valueOf(response.body().get(0).getDescription());
                     String product_ar_name = String.valueOf(response.body().get(0).getAr_name());
                     String product_name = String.valueOf(response.body().get(0).getName());
+                    String product_id = String.valueOf(response.body().get(0).getId());
                     Intent i = new Intent(getApplicationContext(), product_page.class);
                     i.putExtra("img_url",product_img_url);
                     i.putExtra("price",product_price);
@@ -158,6 +161,7 @@ final Activity activity = this;
                     i.putExtra("model",product_model);
                     i.putExtra("description",product_desc);
                     i.putExtra("ar_name",product_ar_name);
+                    i.putExtra("product_id",product_id);
                     startActivity(i);
                 }
                 else{

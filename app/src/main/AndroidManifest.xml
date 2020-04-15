@@ -22,7 +22,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".RouterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".staff.StaffQROptions" />
         <activity android:name=".mapView" />
         <activity android:name=".HistoryActivity" />
@@ -48,11 +55,13 @@
         <activity android:name=".category_productList" />
         <activity android:name=".BannerLayoutCard" />
         <activity android:name=".product_page" />
-        <activity android:name=".SimpleScannerActivity" />
+        <activity android:name=".SimpleScannerActivity">
+
+        </activity>
         <activity
             android:name=".HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".products_card" />
         <activity android:name=".ItemPage" />
         <activity android:name=".content_profile" />

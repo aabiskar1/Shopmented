@@ -44,7 +44,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
 
 
-        holder.item_cardView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_transition_animation));
 
 
         Products product = products.get(position);

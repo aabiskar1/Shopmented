@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.aabiskar.shopmented.models.Products;
 import com.aabiskar.shopmented.staff.LoadVBucks;
 import com.aabiskar.shopmented.staff.UserTypeList;
 import com.luseen.spacenavigation.SpaceItem;
@@ -24,6 +25,12 @@ import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
 import com.ramotion.foldingcell.FoldingCell;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.aabiskar.shopmented.R.color.colorPrimary;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_EMAIL;
@@ -41,14 +48,13 @@ public class HomeActivity extends AppCompatActivity {
     FlowingDrawer mDrawer;
     FoldingCell foldingcell;
     private TextView home_usersName;
-
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
 
 
         getSupportActionBar().hide();
@@ -226,11 +232,9 @@ public class HomeActivity extends AppCompatActivity {
     public void signout(View v){
         SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_UUID,"");
-        editor.putString(KEY_NAME,"");
-        editor.putString(KEY_EMAIL,"");
-        editor.putString(KEY_PHONE,"");
-        editor.apply();
+
+        editor.clear();
+        editor.commit();
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
@@ -281,6 +285,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 

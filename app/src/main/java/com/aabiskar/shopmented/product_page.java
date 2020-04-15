@@ -2,6 +2,7 @@ package com.aabiskar.shopmented;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -118,19 +119,33 @@ public class product_page extends AppCompatActivity {
             }
         });
 
-        buyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buyBtn.startAnimation();
-                addToCart(v);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                    buyBtn.revertAnimation();
-                    }
-                }, 2000);
-            }
-        });
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+        String uuid = sharedPreferences.getString(KEY_UUID,"");
+
+        if(!uuid.isEmpty()) {
+            buyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    buyBtn.startAnimation();
+                    addToCart(v);
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            buyBtn.revertAnimation();
+                        }
+                    }, 1500);
+                }
+            });
+        }
+        else{
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.aabiskar.shopmented");
+            startActivity( launchIntent );
+            overridePendingTransition(R.anim.slide_in_right,android.R.anim.slide_out_right);
+        }
+
+
     }
     public void addToCart(View v){
         SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
