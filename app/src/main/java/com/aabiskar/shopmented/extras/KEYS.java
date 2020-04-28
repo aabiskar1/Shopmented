@@ -13,7 +13,16 @@ public class KEYS {
 
     public static final int KEY_STAFF_ROLE_ID_VALUE  = 2;
     public static final int KEY_CUSTOMER_ROLE_ID_VALUE  = 1;
-    public static final int KEY_ADMIN_ROLE_ID_VALUE  = 1;
+    public static final int KEY_ADMIN_ROLE_ID_VALUE  = 3;
+
+    public static final int KEY_STATUS_ENABLE  = 1;
+    public static final int KEY_STATUS_VERIFIED  = 2;
+    public static final int KEY_STATUS_DISABLED  = 3;
+    public static final int KEY_STATUS_COMPLETED  = 4;
+    public static final int KEY_STATUS_HOLD  = 5;
+    public static final int KEY_STATUS_SHIPPING = 6;
+    public static final int KEY_STATUS_CANCELED = 7;
+
 
 
 }

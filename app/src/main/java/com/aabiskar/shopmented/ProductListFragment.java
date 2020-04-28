@@ -1,6 +1,7 @@
 package com.aabiskar.shopmented;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -27,6 +28,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.aabiskar.shopmented.ApiClient.BASE_URL;
 
 
 public class ProductListFragment extends Fragment {
@@ -110,7 +113,7 @@ public class ProductListFragment extends Fragment {
             public void onProductClick(int position) {
                 String ar_name = "no";
                 String product_name = productsList.get(position).getName().toString();
-                String product_img_url = productsList.get(position).getImg_url().toString();
+                String product_img_url = BASE_URL+ productsList.get(position).getImg_url().toString();
                String  product_model = productsList.get(position).getModel_number();
                 String product_description = productsList.get(position).getDescription().toString();
                 String product_category = productsList.get(position).getCategory().toString();
@@ -130,7 +133,7 @@ public class ProductListFragment extends Fragment {
                 if(productsList.get(position).getAr_name()!=null){
                     i.putExtra("ar_name",ar_name);
                 }
-                startActivity(i);
+                startActivity(i, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
             }
         });
 

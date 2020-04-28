@@ -152,7 +152,7 @@ public interface ApiInterface {
     @POST("UserControls/updateUserStatus.php")
     Call<CartInsert>updateUserStatus(
             @Field("user_id") String user_id,
-            @Field("status") String status
+            @Field("status_id") String status_id
 
     );
 
@@ -175,6 +175,20 @@ public interface ApiInterface {
     );
 
 
+    @GET("history/getAllHistory.php")
+    Call<ArrayList<History>> allHistory();
+
+
+    @GET("history/getShippingOrders.php")
+    Call<ArrayList<History>> allShippingOrders();
+
+    @FormUrlEncoded
+    @POST("order/updateOrder.php")
+    Call<OrderResponse> updateOrderStatus(
+            @Field("order_id") String order_id,
+            @Field("status_id") int status_id
+
+    );
 
 
 

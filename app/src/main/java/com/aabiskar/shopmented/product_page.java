@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.aabiskar.shopmented.models.APIResponse;
 import com.aabiskar.shopmented.models.CartInsert;
+import com.andrognito.flashbar.Flashbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -165,7 +166,14 @@ public class product_page extends AppCompatActivity {
 
                     if(response.body().getSuccess().equals("1")){
 
-                        Toast.makeText(product_page.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                        new Flashbar.Builder(product_page.this)
+                                .gravity(Flashbar.Gravity.BOTTOM)
+                                .title("Added to Cart")
+                                .backgroundColorRes(R.color.success_green)
+                                .duration(1500)
+                                .vibrateOn(Flashbar.Vibration.SHOW)
+                                .showOverlay()
+                                .build().show();
 
 
                     }else{
@@ -174,7 +182,14 @@ public class product_page extends AppCompatActivity {
                     String search  = "duplicate entry";
 
                     if (sentence.toLowerCase().indexOf(search.toLowerCase()) != -1 ) {
-                        Toast.makeText(product_page.this,   "already in cart", Toast.LENGTH_SHORT).show();
+                        new Flashbar.Builder(product_page.this)
+                                .gravity(Flashbar.Gravity.BOTTOM)
+                                .title("Already in Cart")
+                                .backgroundColorRes(R.color.logoutRed)
+                                .duration(1500)
+                                .vibrateOn(Flashbar.Vibration.SHOW, Flashbar.Vibration.DISMISS)
+                                .showOverlay()
+                                .build().show();
 
 
                     } else {

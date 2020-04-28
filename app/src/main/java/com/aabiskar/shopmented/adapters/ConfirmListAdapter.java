@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import com.aabiskar.shopmented.models.Cart;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import static com.aabiskar.shopmented.ApiClient.BASE_URL;
 
 public class ConfirmListAdapter extends RecyclerView.Adapter<ConfirmListAdapter.ViewHolder> {
     private ArrayList<Cart> cartModel = new ArrayList<>();
@@ -40,7 +43,7 @@ public class ConfirmListAdapter extends RecyclerView.Adapter<ConfirmListAdapter.
             holder.productName.setText(cartModel.get(position).getProductName());
             holder.product_price.setText("Rs."+String.valueOf(cartModel.get(position).getPrice()));
             holder.product_qty.setText("x "+String.valueOf(cartModel.get(position).getQuantity()));
-        Picasso.get().load(cartModel.get(position).getImgUrl()).fit().into(holder.img_view);
+        Picasso.get().load(BASE_URL+cartModel.get(position).getImgUrl()).fit().into(holder.img_view);
     }
 
     @Override

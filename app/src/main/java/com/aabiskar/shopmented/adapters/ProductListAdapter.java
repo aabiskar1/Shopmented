@@ -21,6 +21,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aabiskar.shopmented.ApiClient.BASE_URL;
+
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 
     private Context context;
@@ -52,7 +54,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));
 
       //  Toast.makeText(context, product.getModel_number(), Toast.LENGTH_SHORT).show();
-        Picasso.get().load(product.getImg_url()).fit().into(holder.img_view);
+        Picasso.get().load(BASE_URL+product.getImg_url()).fit().into(holder.img_view);
 
     }
 

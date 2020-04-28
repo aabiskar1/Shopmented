@@ -11,7 +11,10 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,8 @@ import retrofit2.Response;
 
 import static com.aabiskar.shopmented.extras.KEYS.KEY_CUSTOMER_ROLE_ID_VALUE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_COMPLETED;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_SHIPPING;
 
 public class vbucksConfirmationPage extends AppCompatActivity {
     RecyclerView testRV;
@@ -40,7 +45,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
     private EditText phone_et;
     private EditText address_et;
-
+    private CheckBox shippingCheckBox,inShopPickCheckBox;
 
     private TextView vbucks_tv;
     private TextView pay_amount_tv;
@@ -53,6 +58,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
     private int role_id;
     private String address_value;
     private TextInputLayout phoneTextInput;
+    private LinearLayout phoneLayout,shippingAddresLayout;
 
 
     @Override
@@ -60,7 +66,8 @@ public class vbucksConfirmationPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vbucks_confirmation_page);
 
-
+        shippingCheckBox = findViewById(R.id.checkBoxShipping);
+        inShopPickCheckBox = findViewById(R.id.checkBoxInShopPick);
         vbucks_tv = findViewById(R.id.confirm_vbucks_amt_value);
         pay_amount_tv = findViewById(R.id.confirm_pay_amount_value);
         balance_tv = findViewById(R.id.confirm_balance_value);
@@ -69,7 +76,12 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
         phone_et = findViewById(R.id.phone_editText);
         address_et = findViewById(R.id.delivery_editText);
+
+        phoneLayout = findViewById(R.id.address_layout);
+        shippingAddresLayout = findViewById(R.id.address_layout);
         phoneTextInput = findViewById(R.id.textInputPhone);
+
+
 
         testRV = findViewById(R.id.test_rv);
 
@@ -77,7 +89,31 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
 
 
+        shippingCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(inShopPickCheckBox.isChecked()){
+                        inShopPickCheckBox.setChecked(false);
+                    }
+                    shippingAddresLayout.setVisibility(View.VISIBLE);
+                }
+                else{
+                    shippingAddresLayout.setVisibility(View.GONE);
+                }
+            }
+        });
 
+        inShopPickCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(shippingCheckBox.isChecked()){
+                        shippingCheckBox.setChecked(false);
+                    }
+                }
+            }
+        });
 
         phone_et.addTextChangedListener(new TextWatcher() {
             @Override
@@ -241,14 +277,33 @@ public class vbucksConfirmationPage extends AppCompatActivity {
 
 
     private void createOrder(){
+            String status_id = String.valueOf(KEY_STATUS_COMPLETED);
+
+            if(shippingCheckBox.isChecked()){
+                if(TextUtils.isEmpty(address_et.getText().toString())){
+                    address_et.setError("Address Required");
+                    address_et.requestFocus();
+                    return;
+                }
+                else{
+                    address_value= address_et.getText().toString();
+                    status_id = String.valueOf(KEY_STATUS_SHIPPING);
+                }
+            }else{
+
+            }
+            if(inShopPickCheckBox.isChecked()){
+                address_value = "Pick at store";
+                status_id = String.valueOf(KEY_STATUS_SHIPPING);
+            }else{
+
+            }
+
+            if(!inShopPickCheckBox.isChecked() && !shippingCheckBox.isChecked()){
+                address_value = "In Store";
+            }
 
 
-            if(TextUtils.isEmpty(address_et.getText().toString())){
-                address_value = "store";
-            }
-            else{
-                address_value= address_et.getText().toString();
-            }
             UUID uuid_transaction = UUID.randomUUID();
 //            UUID uuid_order = UUID.randomUUID();
 
@@ -264,7 +319,7 @@ public class vbucksConfirmationPage extends AppCompatActivity {
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
             apiInterface.createOrder(customer_id, role_id, Double.parseDouble(String.valueOf(pay_amt)),
-                    address_value, phone_et.getText().toString(),"4", uuid_transaction.toString(), payment_mode, currentTime, "4")
+                    address_value, phone_et.getText().toString(),status_id, uuid_transaction.toString(), payment_mode, currentTime, "4")
                     .enqueue(new Callback<OrderResponse>() {
                         @Override
                         public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {

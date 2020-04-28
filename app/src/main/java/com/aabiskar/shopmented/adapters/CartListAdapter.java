@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.aabiskar.shopmented.ApiClient.BASE_URL;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 
@@ -63,7 +64,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Produc
         holder.productPrice.setText("RS."+String.valueOf(product.getPrice()));
         holder.qty_tv.setText(String.valueOf(product.getQuantity()));
 //        Toast.makeText(context, product.getModelNumber(), Toast.LENGTH_SHORT).show();
-        Picasso.get().load(product.getImgUrl()).fit().into(holder.img_view);
+        Picasso.get().load(BASE_URL+product.getImgUrl()).fit().into(holder.img_view);
 //        Double intQty = Integer.parseInt( holder.qty_tv.getText().toString())*
 //               Double.parseDouble( product.getPrice());
 //        Toast.makeText(context, intQty+": total", Toast.LENGTH_SHORT).show();

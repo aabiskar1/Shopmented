@@ -7,47 +7,6 @@
     tools:context=".vbucksConfirmationPage">
 
     <LinearLayout
-        android:id="@+id/address_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="8">
-
-
-        <com.airbnb.lottie.LottieAnimationView
-
-            android:id="@+id/address_animation_view"
-
-
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="delivery_van.json"
-            app:lottie_loop="true" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputDeliveryLocation"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:background="@color/space_transparent"
-            android:hapticFeedbackEnabled="true"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/delivery_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hapticFeedbackEnabled="true"
-                android:hint="Address(leave empty if in store checkout)"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_below="@id/address_layout"
         android:id="@+id/phone_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,12 +50,69 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/checkBoxShipping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_layout"
+        android:text="Required Shipping" />
+
+    <CheckBox
+        android:id="@+id/checkBoxInShopPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBoxShipping"
+        android:text="Pickup later at store" />
+
+    <LinearLayout
+        android:id="@+id/address_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkBoxInShopPick"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="8">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+
+            android:id="@+id/address_animation_view"
+
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="delivery_van.json"
+            app:lottie_loop="true" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputDeliveryLocation"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:background="@color/space_transparent"
+            android:hapticFeedbackEnabled="true"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/delivery_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hapticFeedbackEnabled="true"
+                android:hint="Address(leave empty if in store checkout)"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/test_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/confirm_pay_calc"
-        android:layout_below="@id/phone_layout" />
+        android:layout_below="@id/address_layout" />
 
 
     <RelativeLayout

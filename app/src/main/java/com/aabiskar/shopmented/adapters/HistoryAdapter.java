@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ProductL
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale_animation));
         History history = histories.get(position);
         holder.transaction_id.setText(history.getTransactionId());
         holder.order_id.setText(history.getOrderId());

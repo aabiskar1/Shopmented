@@ -1,10 +1,12 @@
 package com.aabiskar.shopmented.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import com.aabiskar.shopmented.R;
 import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.User;
 import com.aabiskar.shopmented.models.Users;
+import com.aabiskar.shopmented.product_page;
+import com.andrognito.flashbar.Flashbar;
 import com.nightonke.jellytogglebutton.JellyToggleButton;
 import com.nightonke.jellytogglebutton.State;
 
@@ -53,6 +57,7 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
 
     @Override
     public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation));
         User user = users.get(position);
         holder.username.setText(user.getName());
         holder.userId.setText(String.valueOf(user.getId()));
@@ -141,12 +146,8 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
                                             } else {
                                                 controlToggle.setChecked(false);
                                             }
-
-
                                         }
-
                                     }
-
                                     @Override
                                     public void onFailure(Call<CartInsert> call, Throwable t) {
                                         Toast.makeText(itemView.getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -154,7 +155,6 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
                                     }
                                 });
                             } else {
-
                                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
                                 apiInterface.updateUserStatus(userId.getText().toString(), "disable").enqueue(new Callback<CartInsert>() {
                                     @Override
@@ -164,17 +164,13 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
                                         } else {
                                             controlToggle.setChecked(true);
                                         }
-
                                     }
-
                                     @Override
                                     public void onFailure(Call<CartInsert> call, Throwable t) {
                                         Toast.makeText(itemView.getContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                         controlToggle.setChecked(true);
                                     }
                                 });
-
-
                             }
                         }
                     }
@@ -182,7 +178,6 @@ public class UACAdapter extends RecyclerView.Adapter<UACAdapter.ProductListViewH
             });
         }
     }
-
     public interface OnProductClickListener {
         void onProductClick(int position);
     }

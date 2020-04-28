@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.aabiskar.shopmented.models.Cart;
 import com.aabiskar.shopmented.models.CartAmount;
 import com.aabiskar.shopmented.models.CartInsert;
 import com.aabiskar.shopmented.models.Products;
+import com.andrognito.flashbar.Flashbar;
 
 import java.util.ArrayList;
 
@@ -67,9 +69,22 @@ public class CartFragment extends Fragment {
         checkout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),PaymentOption.class);
-                intent.putExtra("totalamt",total_amt_tv.getText().toString());
-                startActivity(intent);
+                if(adapter.getItemCount()>=1) {
+                    Intent intent = new Intent(getActivity(), PaymentOption.class);
+                    intent.putExtra("totalamt", total_amt_tv.getText().toString());
+                    startActivity(intent);
+                }
+                else{
+                    new Flashbar.Builder(getActivity())
+                            .gravity(Flashbar.Gravity.BOTTOM)
+                            .title("Cart Empty")
+                            .backgroundColorRes(R.color.logoutRed)
+                            .duration(1500)
+                            .vibrateOn(Flashbar.Vibration.SHOW)
+                            .showOverlay()
+                            .build().show();
+
+                }
             }
         });
 
@@ -82,8 +97,14 @@ public class CartFragment extends Fragment {
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         if (visible) {
-            getData();
-            getTotalCartPrice();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    getData();
+                    getTotalCartPrice();
+                }
+            }, 200);
+
         } else {
 
         }
@@ -119,8 +140,14 @@ public class CartFragment extends Fragment {
         adapter.setOnProductClicklistener(new CartListAdapter.OnProductClickListener() {
             @Override
             public void onProductClick(int position) {
-                getFragmentManager().beginTransaction().detach(CartFragment.this).attach(CartFragment.this).commit();
-                getData();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        getFragmentManager().beginTransaction().detach(CartFragment.this).attach(CartFragment.this).commit();
+                        getData();
+                    }
+                }, 500);
 
             }
         });
