@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -29,6 +30,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
@@ -39,6 +41,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
  */
 public class ProfileFragment extends Fragment {
     ImageView qrImgView;
+    private TextView  memberCardName;
     private CardView history_card_view;
     public ProfileFragment() {
         // Required empty public constructor
@@ -58,6 +61,7 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);;
         qrImgView = v.findViewById(R.id.profile_qr_imgview);
         history_card_view = v.findViewById(R.id.profile_history_card);
+        memberCardName = v.findViewById(R.id.profile_memberShipCardName);
         history_card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,9 +98,11 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS, MODE_PRIVATE);
         String uuid = sharedPreferences.getString(KEY_UUID, "");
         int user_id = sharedPreferences.getInt(KEY_USER_ID, 0);
+        String user_name = sharedPreferences.getString(KEY_NAME, "").toUpperCase();
         String user_id_qr = user_id+"";
         if (!uuid.isEmpty()) {
             genQR(user_id_qr,qrImgView);
+            memberCardName.setText(user_name);
             //     Toast.makeText(getActivity(), "WELCOME,"+uuid, Toast.LENGTH_SHORT).show();
         }
     }

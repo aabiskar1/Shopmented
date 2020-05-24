@@ -43,7 +43,7 @@ private TextView customer_id_txt;
         startActivity(intent_final);
     }
     public void sendToLoadVBucks(View v){
-        Intent intent_final = new Intent(getApplicationContext(), vbucksConfirmationPage.class);
+        Intent intent_final = new Intent(getApplicationContext(), LoadVBucks.class);
 
         intent_final.putExtra("customer_id",String.valueOf(customer_id_value));
         startActivity(intent_final);

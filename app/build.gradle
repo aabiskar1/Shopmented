@@ -81,7 +81,7 @@ dependencies {
     implementation 'com.andrognito.flashbar:flashbar:1.0.2'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.6'
-
+    implementation 'com.pranavpandey.android:dynamic-toasts:3.2.0'
 
 
 

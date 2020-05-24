@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -43,7 +44,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_CUSTOMER_ROLE_ID_VALUE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_NAME;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
@@ -60,6 +63,7 @@ public class ShopFragment extends Fragment {
     private EditText searchEt;
     private RelativeLayout mainLayout;
     private CardView ARCardView;
+    private SharedPreferences sharedPreferences;
 
 
     public ShopFragment() {
@@ -74,7 +78,7 @@ public class ShopFragment extends Fragment {
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary,getActivity().getTheme()));
 
 
-
+        sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
 
         View v = inflater.inflate(R.layout.fragment_shop, container, false);
         mainLayout = v.findViewById(R.id.shop_main_layout);
@@ -131,9 +135,30 @@ public class ShopFragment extends Fragment {
             public boolean onKey(View view, int keyCode, KeyEvent event) {
                 String searchTerm = searchEt.getText().toString();
                 if (searchTerm.isEmpty()) {
-                    searchEt.requestFocus();
+                    searchEt.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    new Flashbar.Builder(getActivity())
+                            .gravity(Flashbar.Gravity.BOTTOM)
+                            .title("Please enter search term")
+                            .duration(1700)
+                            .backgroundColorRes(R.color.buttons)
+                            .build().show();
 
-                } else {
+                }
+                else if(sharedPreferences.getInt(KEY_ROLE_ID,0)!=KEY_CUSTOMER_ROLE_ID_VALUE){
+                    searchEt.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    new Flashbar.Builder(getActivity())
+                            .gravity(Flashbar.Gravity.BOTTOM)
+                            .title("ACCESS DENIED")
+                            .message("YOU MUST BE LOGGED IN AS CUSTOMER TO SEARCH PRODUCTS")
+                            .duration(3000)
+                            .backgroundColorRes(R.color.logoutRed)
+                            .build().show();
+                }
+                else {
                     if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                             (keyCode == KeyEvent.KEYCODE_ENTER)) {
                         Intent intent_search = new Intent(getActivity().getApplicationContext(),SearchActivity.class);
@@ -198,7 +223,7 @@ public class ShopFragment extends Fragment {
 
 
     public void loadSharedPrefData(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(KEY_SHARED_PREFS,MODE_PRIVATE);
+
         String uuid = sharedPreferences.getString(KEY_UUID,"");
         String name = sharedPreferences.getString(KEY_NAME,"");
 
@@ -220,7 +245,8 @@ public class ShopFragment extends Fragment {
                 if(response.body()!=null) {
                     ArrayList<VBucks> totalVBucksArr = new ArrayList<>();
                     totalVBucksArr = response.body();
-                    vBucksAmt.setText("Rs."+totalVBucksArr.get(0).getTotal() + " ");
+                    if(totalVBucksArr.size() > 0){
+                    vBucksAmt.setText("Rs."+totalVBucksArr.get(0).getTotal() + " ");}
                 }
                 else{
                     vBucksAmt.setText("Connection Error");

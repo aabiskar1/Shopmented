@@ -97,7 +97,7 @@ public class product_page extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getSupportActionBar().hide();
 
-            Picasso.get().load(img_url).fit().into(product_img);
+            Picasso.get().load(img_url).into(product_img);
 //            Toast.makeText(this, model + "mode is", Toast.LENGTH_SHORT).show();
             item_qty_minus_btn.setOnClickListener(new View.OnClickListener() {
                 @Override

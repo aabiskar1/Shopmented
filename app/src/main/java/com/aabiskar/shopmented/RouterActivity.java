@@ -17,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.aabiskar.shopmented.ApiClient.BASE_URL;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
@@ -61,7 +62,7 @@ public class RouterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Products>> call, Response<ArrayList<Products>> response) {
                 if (!response.body().isEmpty()) {
-                    String product_img_url = response.body().get(0).getImg_url();
+                    String product_img_url = BASE_URL+response.body().get(0).getImg_url();
                     String product_price = String.valueOf(response.body().get(0).getPrice());
                     String product_model = String.valueOf(response.body().get(0).getModel_number());
                     String product_desc = String.valueOf(response.body().get(0).getDescription());

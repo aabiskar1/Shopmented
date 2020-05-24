@@ -59,7 +59,7 @@ public class UserControl extends AppCompatActivity {
 
         if (extras != null) {
             role_id = extras.getString("role_id");
-            Toast.makeText(getApplicationContext(), role_id, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), role_id, Toast.LENGTH_SHORT).show();
             // and get whatever type user account id is
             getData(role_id);
         }

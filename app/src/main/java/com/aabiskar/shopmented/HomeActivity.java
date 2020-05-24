@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.aabiskar.shopmented.models.History;
 import com.aabiskar.shopmented.models.Products;
+import com.aabiskar.shopmented.models.User;
 import com.aabiskar.shopmented.staff.LoadVBucks;
 import com.aabiskar.shopmented.staff.UserTypeList;
 import com.aabiskar.shopmented.staff.allOrders;
@@ -28,6 +30,7 @@ import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.util.ArrayList;
@@ -45,6 +48,9 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_PHONE;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_ROLE_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_SHARED_PREFS;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_STAFF_ROLE_ID_VALUE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_DISABLED;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_ENABLE;
+import static com.aabiskar.shopmented.extras.KEYS.KEY_STATUS_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_USER_ID;
 import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 
@@ -279,6 +285,8 @@ public class HomeActivity extends AppCompatActivity {
 //            }
 //        });
 
+        checkUserStatus(getCurrentFocus());
+
     }
 
     public void signout(View v){
@@ -346,7 +354,32 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    public void checkUserStatus(View v){
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SHARED_PREFS, MODE_PRIVATE);
+        int status_id = sharedPreferences.getInt(KEY_STATUS_ID, 0);
+        int role_id = sharedPreferences.getInt(KEY_ROLE_ID, 0);
+        int customer_id = sharedPreferences.getInt(KEY_USER_ID,0);
+        ApiInterface apiInterface;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        apiInterface.getUserStatus(customer_id).enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                ArrayList<User> usersList = response.body();
 
+                if(usersList.get(0).getStatus_id()==KEY_STATUS_DISABLED && usersList.get(0).getRole_id()!= KEY_ADMIN_ROLE_ID_VALUE ){
+                signout(v);
+                    DynamicToast.makeError(getApplicationContext(),"ACCOUNT DISABLED..Please Contact support").show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 }

@@ -149,6 +149,11 @@ public interface ApiInterface {
             @Field("role_id") String role_id
     );
     @FormUrlEncoded
+    @POST("UserControls/getUserStatus.php")
+    Call<ArrayList<User>>getUserStatus(
+            @Field("customer_id") int customer_id
+    );
+    @FormUrlEncoded
     @POST("UserControls/updateUserStatus.php")
     Call<CartInsert>updateUserStatus(
             @Field("user_id") String user_id,
