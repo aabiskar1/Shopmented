@@ -113,7 +113,7 @@ public class ShopFragment extends Fragment {
         sofaCategoryLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),category_productList.class);
+                Intent intent = new Intent(getActivity(),UserQROnly.class);
                 startActivity(intent);
             }
         });

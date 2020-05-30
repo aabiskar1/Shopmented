@@ -4,6 +4,7 @@
     package="com.aabiskar.shopmented">
 
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -22,7 +23,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".staff.allOrders"></activity>
+        <activity android:name=".AccountInfoPage"></activity>
+        <activity android:name=".staff.allOrders" />
         <activity android:name=".RouterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -58,7 +60,7 @@
         <activity android:name=".category_productList" />
         <activity android:name=".BannerLayoutCard" />
         <activity android:name=".product_page" />
-        <activity android:name=".SimpleScannerActivity"></activity>
+        <activity android:name=".SimpleScannerActivity" />
         <activity
             android:name=".HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

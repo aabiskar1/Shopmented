@@ -219,27 +219,28 @@ public class HomeActivity extends AppCompatActivity {
 
         mDrawer = (FlowingDrawer) findViewById(R.id.drawerlayout);
         mDrawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
-        mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
-            @Override
-            public void onDrawerStateChange(int oldState, int newState) {
-                if (newState == ElasticDrawer.STATE_CLOSED) {
-                    Log.i("MainActivity", "Drawer STATE_CLOSED");
-                }
-            }
-
-            @Override
-            public void onDrawerSlide(float openRatio, int offsetPixels) {
-                Log.i("MainActivity", "openRatio=" + openRatio + " ,offsetPixels=" + offsetPixels);
-            }
-        });
-
-        foldingcell = findViewById(R.id.folding_cell);
-        foldingcell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                foldingcell.toggle(false);
-            }
-        });
+        // FOLDING DRAWER ON CLICK ACTIONS
+//        mDrawer.setOnDrawerStateChangeListener(new ElasticDrawer.OnDrawerStateChangeListener() {
+//            @Override
+//            public void onDrawerStateChange(int oldState, int newState) {
+//                if (newState == ElasticDrawer.STATE_CLOSED) {
+//                    Log.i("MainActivity", "Drawer STATE_CLOSED");
+//                }
+//            }
+//
+//            @Override
+//            public void onDrawerSlide(float openRatio, int offsetPixels) {
+//                Log.i("MainActivity", "openRatio=" + openRatio + " ,offsetPixels=" + offsetPixels);
+//            }
+//        });
+//
+//        foldingcell = findViewById(R.id.folding_cell);
+//        foldingcell.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                foldingcell.toggle(false);
+//            }
+//        });
 
 //        bottomNavigation.setBackgroundColor(getColor(colorPrimary));
 //        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
@@ -346,7 +347,6 @@ public class HomeActivity extends AppCompatActivity {
         {
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 Intent intent = new Intent(this,UserQROnly.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
 
             }

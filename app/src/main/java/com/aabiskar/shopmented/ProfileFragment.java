@@ -42,7 +42,7 @@ import static com.aabiskar.shopmented.extras.KEYS.KEY_UUID;
 public class ProfileFragment extends Fragment {
     ImageView qrImgView;
     private TextView  memberCardName;
-    private CardView history_card_view;
+    private CardView history_card_view, account_info_card;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);;
         qrImgView = v.findViewById(R.id.profile_qr_imgview);
         history_card_view = v.findViewById(R.id.profile_history_card);
+        account_info_card = v.findViewById(R.id.profile_accountInfo_card);
         memberCardName = v.findViewById(R.id.profile_memberShipCardName);
         history_card_view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +75,16 @@ public class ProfileFragment extends Fragment {
                 startActivity(history_intent);
             }
         });
+        account_info_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_account = new Intent(getActivity(), AccountInfoPage.class);
+                startActivity(intent_account);
+
+            }
+        });
+
+
 
         loadSharedPrefData();
 
