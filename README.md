@@ -1,6 +1,6 @@
 # Shopmented
 <p align="center">
-<img src="https://github.com/aabiskar1/Shopmented/blob/master/extra_files_DELETE_THIS_FOLDER/dashboard.png">
+<img src="https://github.com/aabiskar1/Shopmented/blob/master/extra_files_DELETE_THIS_FOLDER/dashboard.png" width="500" height="600">
 </p>
 <p align="center">
 <img src="https://github.com/aabiskar1/Shopmented/blob/master/extra_files_DELETE_THIS_FOLDER/login.png">
